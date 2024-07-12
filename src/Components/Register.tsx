@@ -1,0 +1,129 @@
+"use client";
+
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useRouter } from "next/navigation";
+import "@/app/globals.css";
+// import Navbar from "@/Components/Navbar/navbar";
+// Define Yup schema for validation
+const validationSchema = Yup.object().shape({
+  fullName: Yup.string().required("Full Name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
+
+const RegistrationForm = () => {
+  const router = useRouter();
+
+  const handleSubmit = (values: any, { setSubmitting }: any) => {
+    // Handle form submission logic here, e.g., send data to backend
+    console.log("Form values:", values);
+    setSubmitting(false); // Must call setSubmitting(false) when done
+    // Redirect to profile page after registration (mock)
+    router.push("/profile");
+  };
+
+  const handleHomeClick = () => {
+    router.push("/"); // Redirect to home page
+  };
+
+  return (
+    <div className=" mt-20 min-h-screen flex items-center justify-center bg-blue-100">
+      <div className="bg-blue-100 p-8 rounded-lg shadow-md w-full max-w-md">
+        <div className="bg-blue-100 flex justify-between mb-4">
+          <h2 className="text-2xl font-bold text-center">Register</h2>
+        </div>
+        <Formik
+          initialValues={{ fullName: "", email: "", password: "" }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting }) => (
+            <Form>
+              <div className="mb-4 ">
+                <label
+                  htmlFor="fullName"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Full Name
+                </label>
+                <Field
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <ErrorMessage
+                  name="fullName"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label
+                  htmlFor="email"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Email
+                </label>
+                <Field
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label
+                  htmlFor="password"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Password
+                </label>
+                <Field
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200"
+              >
+                {isSubmitting ? "Submitting..." : "Register"}
+              </button>
+            </Form>
+          )}
+        </Formik>
+        <div className="mt-6 text-center">
+          <button
+            // onClick={handleGoogleLogin}
+            className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-200"
+          >
+            Continue with Google
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default RegistrationForm;

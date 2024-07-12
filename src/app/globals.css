@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* .btn {
+  @apply px-6 py-2 bg-orange-400 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+} */
+
+a {
+  cursor: pointer;
+}
+.btn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px; /* Full rounded corners for buttons */
+  background-color: #6200ee; /* Purple background */
+  color: white; /* White text */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #3700b3; /* Darker purple on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+}
+
+.btn:active {
+  background-color: #190e50; /* Even darker purple on click */
+  transform: scale(0.95); /* Slightly smaller on click */
+}
+
+.cursor-custom {
+  cursor: url("/frontend/ecommerce_website/src/custom-cursor.svg") 12 12, auto;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cursor-custom {
+  animation: pulse 1.5s ease-in-out infinite;
+}
