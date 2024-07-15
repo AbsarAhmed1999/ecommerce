@@ -34,9 +34,9 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   }, [currentIndex, images.length]);
 
   return (
-    <div className="relative w-full overflow-hidden bg-blue-200 top-32">
+    <div className="bg-slate-900 w-full overflow-hidden ">
       <div className="flex items-center justify-center font-bold text-4xl pb-5 mt-5">
-        <h1>PRODUCTS</h1>
+        <h1 className="text-6xl text-white">PRODUCTS</h1>
       </div>
       <div
         className="flex items-center transition-transform duration-1000 ease-in-out"
@@ -58,7 +58,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
           </div>
         ))}
       </div>
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center pb-4">
+      <div className="bottom-0 left-0 right-0 flex justify-center pb-4 mt-5">
         {images.map((_, idx) => (
           <div
             key={idx}

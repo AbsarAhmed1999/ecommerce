@@ -3,13 +3,22 @@ import React, { useState } from "react";
 import Link from "next/link";
 import "@/app/globals.css";
 import Navbar from "@/Components/Navbar/navbar";
+import { useRouter } from "next/navigation";
+
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
 }
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.currentTarget.value);
+  };
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.currentTarget.value);
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const response = await fetch("/api/login", {
@@ -19,10 +28,12 @@ export default function Login() {
       },
       body: JSON.stringify({ email, password }),
     });
+    console.log(response, "RESPONSE INSIDE LOGIN PAGE");
 
     if (response.ok) {
       const data = await response.json();
       console.log(data.message);
+      router.push("/dashboard");
     } else {
       console.error("Login failed");
     }
@@ -46,6 +57,8 @@ export default function Login() {
                 type="email"
                 id="email"
                 name="email"
+                value={email}
+                onChange={handleEmailChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
@@ -58,15 +71,18 @@ export default function Login() {
                 Password
               </label>
               <input
+                onChange={handlePasswordChange}
                 type="password"
                 id="password"
                 name="password"
+                value={password}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
             <button
               type="submit"
+              onClick={handleSubmit}
               className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200"
             >
               Login

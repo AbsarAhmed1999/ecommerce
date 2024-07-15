@@ -34,16 +34,27 @@ const RegistrationForm = () => {
     values: Values,
     { setSubmitting }: FormikHelpers<Values>
   ) => {
-    // Handle form submission logic here, e.g., send data to backend
-    console.log("Form values:", values);
-    setSubmitting(false); // Must call setSubmitting(false) when done
-    // Redirect to profile page after registration (mock)
-    // Now send values to backend API
-    const result = await fetch("/api/register", {
-      method: "POST",
-      body: JSON.stringify(values),
-    });
-    console.log(result);
+    try {
+      console.log("Form values:", values);
+      const result = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (result.ok) {
+        console.log("User registered successfully");
+        router.push("/dashboard"); // Adjust the path as needed
+      } else {
+        console.error("Registration failed");
+      }
+    } catch (error) {
+      console.error("An error occurred during registration", error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleHomeClick = () => {

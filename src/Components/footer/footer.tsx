@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram } from "react-icons/fa"; // Importing react-ico
 
 export default function Footer() {
   return (
-    <div className="bg-gray-900 text-white p-6">
+    <div className="bg-gray-900 mt-2 text-white p-6">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Left section */}
         <div>
