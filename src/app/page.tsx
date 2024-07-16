@@ -24,7 +24,7 @@ export default function Home() {
         <Navbar loggedIn={false} />
       </div>
       {/**Front page */}
-      <div className="bg-gray-800">
+      <div className="bg-gray-800 ">
         <SectionOne />
       </div>
       {/**About us */}
@@ -34,7 +34,9 @@ export default function Home() {
       <div>
         <Carousel images={images} />
       </div>
-      {/* <Contact /> */}
+      <div>
+        <Contact />
+      </div>
       <Footer />
     </div>
   );

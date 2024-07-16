@@ -34,7 +34,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   }, [currentIndex, images.length]);
 
   return (
-    <div className="bg-slate-900 w-full overflow-hidden ">
+    <div className="bg-gray-800 w-full overflow-hidden">
       <div className="flex items-center justify-center font-bold text-4xl pb-5 mt-5">
         <h1 className="text-6xl text-white">PRODUCTS</h1>
       </div>

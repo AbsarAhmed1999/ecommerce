@@ -46,3 +46,17 @@ a {
 .cursor-custom {
   animation: pulse 1.5s ease-in-out infinite;
 }
+@media (min-width: 320px) and (max-width: 768px) {
+  .custom-flex-md {
+    flex-direction: column;
+  }
+  .custom-width-md {
+    width: 350px;
+  }
+}
+
+@media (min-width: 768px) {
+  .custom-flex-lg {
+    flex-direction: row;
+  }
+}

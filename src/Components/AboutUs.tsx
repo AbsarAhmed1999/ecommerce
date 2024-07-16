@@ -1,8 +1,9 @@
 import React from "react";
+import "@/app/globals.css";
 
 export default function AboutUs() {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-11 bg-gray-300 mt-3">
+    <div className="flex flex-col custom-flex-md custom-flex-lg justify-between items-center p-6 md:p-11 bg-gray-300 mt-3">
       <div className="flex-1 flex flex-col justify-center items-start p-6 md:p-10">
         <h1 className="text-5xl font-bold mb-8">Our Story</h1>
         <hr className="border-t-4 border-black w-52 ml-0 mb-8" />
@@ -16,12 +17,12 @@ export default function AboutUs() {
           ducimus alias qui mollitia eum dolores aliquid accusamus quod.
         </p>
       </div>
-      <div className="flex-1 flex items-center justify-center md:justify-end md:p-10">
-        <div className="w-full md:w-[700px]">
+      <div className="flex-1 flex items-center justify-center md:p-10">
+        <div className="w-96 md:w-[500px] ">
           <img
             src="/product4.jpg"
             alt="Product"
-            className="object-contain mix-blend-darken"
+            className="object-contain mix-blend-darken custom-width-md"
           />
         </div>
       </div>

@@ -14,9 +14,9 @@ export default function Navbar({ loggedIn }: NavbarProps) {
   };
 
   return (
-    <nav className="bg-neutral-400 bg-opacity-75 shadow-md overflow-hidden fixed top-4 left-1/2 transform -translate-x-1/2  w-auto px-4 md:px-10 py-4 z-50">
+    <nav className="bg-neutral-400 bg-opacity-75 shadow-md overflow-hidden fixed top-4 left-1/2 transform -translate-x-1/2  w-auto px-4 md:px-10 py-4 z-50 ">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center">
+        <div className="flex items-center lg:hidden">
           <img src="/cart1.png" className="w-12 mr-8" />
         </div>
         <div className="hidden md:flex space-x-5">
@@ -36,7 +36,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
             </Button>
           </Link>
         </div>
-        <div className="hidden md:flex">
+        <div className="hidden md:flex lg:w-36 md:w-36">
           <Link href="/login" className="ml-5">
             <Button variant="contained" size="medium">
               Sign In
