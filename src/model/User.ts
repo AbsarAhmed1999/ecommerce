@@ -8,6 +8,7 @@ interface IUser extends Document {
   password: string;
   userType: UserType;
   cart: IProduct[];
+  accessToken: string;
 }
 
 interface ICartProduct {
@@ -26,9 +27,14 @@ const CartProductSchema = new Schema<ICartProduct>({
 const userSchema = new Schema({
   fullName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  userType: { type: String, enum: Object.values(UserType) },
+  userType: {
+    type: String,
+    enum: Object.values(UserType),
+    default: UserType.USER,
+  },
   password: { type: String, required: true },
   cart: { type: [CartProductSchema], default: [] },
+  accessToken: { type: String, required: false },
 });
 
 const User: Model<IUser> = models.User || model<IUser>("User", userSchema);

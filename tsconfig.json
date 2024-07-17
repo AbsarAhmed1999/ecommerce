@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/types/**/*.d.ts",
-    "src/pages/index.js"
+    "src/pages/index.js",
+    "generate-random-key.js"
   ],
   "exclude": ["node_modules"]
 }

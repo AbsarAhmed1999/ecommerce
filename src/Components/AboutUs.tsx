@@ -3,8 +3,8 @@ import "@/app/globals.css";
 
 export default function AboutUs() {
   return (
-    <div className="flex flex-col custom-flex-md custom-flex-lg justify-between items-center p-6 md:p-11 bg-gray-300 mt-3">
-      <div className="flex-1 flex flex-col justify-center items-start p-6 md:p-10">
+    <div className="flex flex-col custom-flex-md custom-flex-lg justify-between items-center p-6  bg-gray-300 mt-3">
+      <div className="flex-1 flex flex-col justify-center items-start p-6 ">
         <h1 className="text-5xl font-bold mb-8">Our Story</h1>
         <hr className="border-t-4 border-black w-52 ml-0 mb-8" />
         <p className="font-semibold">
@@ -17,8 +17,8 @@ export default function AboutUs() {
           ducimus alias qui mollitia eum dolores aliquid accusamus quod.
         </p>
       </div>
-      <div className="flex-1 flex items-center justify-center md:p-10">
-        <div className="w-96 md:w-[500px] ">
+      <div className="flex-1 flex items-center justify-center">
+        <div className="w-96 md:w-[400px] ">
           <img
             src="/product4.jpg"
             alt="Product"

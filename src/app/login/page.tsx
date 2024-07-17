@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
 }
-export default function Login() {
+export default async function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function Login() {
   };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await fetch("/api/login", {
+    const response = await fetch("/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,9 +33,9 @@ export default function Login() {
     if (response.ok) {
       const data = await response.json();
       console.log(data.message);
-      router.push("/dashboard");
+      router.push("api/users/dashboard");
     } else {
-      console.error("Login failed");
+      console.log("Login failed");
     }
   };
 

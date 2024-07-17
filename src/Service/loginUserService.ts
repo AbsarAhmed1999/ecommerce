@@ -18,9 +18,9 @@ export async function loginUserService(userLoginCredentials: login) {
     // check password:
     const passwordMatched = await bcrypt.compare(password, hashPassword);
     if (passwordMatched) {
-      return "SUCCESS";
+      return true;
     } else {
-      return "FAILED";
+      return false;
     }
   }
 }

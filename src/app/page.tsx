@@ -1,7 +1,6 @@
 "use client";
 import Contact from "@/Components/Contact";
 import Navbar from "@/Components/Navbar/navbar";
-import Register from "@/Components/Register";
 import SectionOne from "@/Components/SectionOne";
 import Footer from "@/Components/footer/footer";
 import Carousel from "@/Components/reactCrousel/Craousel";
@@ -11,12 +10,12 @@ import AboutUs from "@/Components/AboutUs";
 // import data from "@/data/product.json";
 export default function Home() {
   const images = [
-    "/product1.jpg",
-    "/product2.jpg",
-    "/product3.jpg",
-    "/product1.jpg",
-    "/product2.jpg",
-    "/product3.jpg",
+    "/remove.png",
+    "/remove1.png",
+    "/remove2.png",
+    "/remove.png",
+    "/remove1.png",
+    "/remove2.png",
   ];
   return (
     <div>
@@ -34,7 +33,7 @@ export default function Home() {
       <div>
         <Carousel images={images} />
       </div>
-      <div>
+      <div id="contact">
         <Contact />
       </div>
       <Footer />

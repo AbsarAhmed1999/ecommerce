@@ -1,3 +1,4 @@
+import { JwtAuthService } from "@/app/utils/jwt-service";
 import User from "@/model/User";
 import bcrypt from "bcrypt";
 
@@ -17,15 +18,15 @@ export async function registerUserService(userInput: UserInput) {
 
   // Check if user already exists by email
   const userExist = await User.findOne({ email: email });
-  console.log("Checking Existing User", userExist);
 
   if (userExist) {
-    throw new Error("User already exists with this email");
+    return "USER already Exist";
   }
 
   const salt = 10;
   const hashedPassword = await bcrypt.hash(password, salt);
-
+  //instantiate jwt auth service
+  const jwtAuthService = new JwtAuthService();
   // Create a new user
   try {
     const newUser = new User({
@@ -33,8 +34,14 @@ export async function registerUserService(userInput: UserInput) {
       email,
       password: hashedPassword,
     });
+    // generate token
+    const token = jwtAuthService.createToken({
+      id: newUser._id,
+      email: newUser.email,
+    });
+    newUser.accessToken = token;
     await newUser.save();
-    return newUser;
+    return { user: newUser, token };
   } catch (error) {
     const e = error as Error;
     if ((e as any).code === 11000) {
@@ -43,7 +50,6 @@ export async function registerUserService(userInput: UserInput) {
         throw new Error(`User already exists with this email: ${email}`);
       }
     }
-    console.error("Error creating user:", e);
     throw new Error("Failed to create new User");
   }
 }

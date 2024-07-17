@@ -36,7 +36,7 @@ const RegistrationForm = () => {
   ) => {
     try {
       console.log("Form values:", values);
-      const result = await fetch("/api/register", {
+      const result = await fetch("/api/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,11 +44,13 @@ const RegistrationForm = () => {
         body: JSON.stringify(values),
       });
 
-      if (result.ok) {
-        console.log("User registered successfully");
-        router.push("/dashboard"); // Adjust the path as needed
-      } else {
+      if (!result.ok) {
         console.error("Registration failed");
+      } else {
+        const data = await result.json();
+        localStorage.setItem("token", data.token);
+        router.push("api/users/dashboard"); // Adjust the path as needed
+        console.log("User registered successfully");
       }
     } catch (error) {
       console.error("An error occurred during registration", error);

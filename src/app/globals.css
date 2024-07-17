@@ -53,6 +53,12 @@ a {
   .custom-width-md {
     width: 350px;
   }
+  .custom-picture-md {
+    width: 200px;
+  }
+  .custom-text-md {
+    font-size: 50px;
+  }
 }
 
 @media (min-width: 768px) {

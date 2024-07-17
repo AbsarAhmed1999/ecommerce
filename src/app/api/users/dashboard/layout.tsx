@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "@/app/globals.css";
 import SearchBar from "@/Components/SearchBar/SearchBar";
+import ImageAvatars from "@/Components/Avatar";
 
 export default function Layout({ children }: any) {
   return (
@@ -13,23 +14,12 @@ export default function Layout({ children }: any) {
         <SearchBar />
         <Link href="/cart">
           <div className="relative h-8 w-8 mr-4 cursor-pointer">
-            <Image
-              src="/path/to/cart-icon.png" // Replace with the path to your cart icon
-              alt="Cart"
-              layout="fill"
-              objectFit="cover"
-            />
+            <img src="/trolley.png" />
           </div>
         </Link>
         <Link href="/profile">
           <div className="relative h-10 w-10 cursor-pointer">
-            <Image
-              src="/path/to/profile-image.jpg" // Replace with the path to your profile image
-              alt="Profile"
-              layout="fill"
-              objectFit="cover"
-              className="rounded-full"
-            />
+            <ImageAvatars />
           </div>
         </Link>
       </div>

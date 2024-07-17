@@ -34,9 +34,9 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   }, [currentIndex, images.length]);
 
   return (
-    <div className="bg-gray-800 w-full overflow-hidden">
+    <div className="bg-slate-500 w-full overflow-hidden">
       <div className="flex items-center justify-center font-bold text-4xl pb-5 mt-5">
-        <h1 className="text-6xl text-white">PRODUCTS</h1>
+        <h1 className="text-6xl text-white custom-text-md">PRODUCTS</h1>
       </div>
       <div
         className="flex items-center transition-transform duration-1000 ease-in-out"
@@ -54,6 +54,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
               //   objectFit="cover"
               width={600}
               height={400}
+              className="custom-picture-md"
             />
           </div>
         ))}

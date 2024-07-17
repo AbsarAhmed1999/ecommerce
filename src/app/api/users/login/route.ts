@@ -7,7 +7,11 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const loginCredentials = await loginUserService(body);
     console.log("loginCredentials", loginCredentials);
-    return NextResponse.json({ message: loginCredentials }, { status: 201 });
+    if (loginCredentials) {
+      return NextResponse.json({ message: "SUCCESS" }, { status: 201 });
+    } else {
+      return NextResponse.json({ message: "FAILED" }, { status: 401 });
+    }
   } catch (error) {
     console.error("Error in API route:", error); // Log the error for debugging
     if (error instanceof Error) {

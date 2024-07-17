@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector } from "../../../redux/hooks";
 import { ProductCard } from "@/Components/ProductCard/ProductCard";
+import ImageAvatars from "@/Components/Avatar";
 // import Layout from "../components/Layout";
 
 export default function Dashboard() {
