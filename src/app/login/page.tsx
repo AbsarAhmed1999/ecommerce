@@ -4,11 +4,12 @@ import Link from "next/link";
 import "@/app/globals.css";
 import Navbar from "@/Components/Navbar/navbar";
 import { useRouter } from "next/navigation";
+import { JwtAuthService } from "../utils/jwt-service";
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
 }
-export default async function Login() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -28,12 +29,11 @@ export default async function Login() {
       },
       body: JSON.stringify({ email, password }),
     });
-    console.log(response, "RESPONSE INSIDE LOGIN PAGE");
 
+    const result = await response.json();
     if (response.ok) {
-      const data = await response.json();
-      console.log(data.message);
-      router.push("api/users/dashboard");
+      console.log("DATA MESSAGE", result);
+      router.push("/dashboard");
     } else {
       console.log("Login failed");
     }

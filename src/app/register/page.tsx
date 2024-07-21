@@ -49,7 +49,7 @@ const RegistrationForm = () => {
       } else {
         const data = await result.json();
         localStorage.setItem("token", data.token);
-        router.push("api/users/dashboard"); // Adjust the path as needed
+        router.push("/dashboard"); // Adjust the path as needed
         console.log("User registered successfully");
       }
     } catch (error) {

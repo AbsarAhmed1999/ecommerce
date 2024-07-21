@@ -1,12 +1,31 @@
-// components/Layout.js
-import React from "react";
-import Image from "next/image";
+"use client";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import "@/app/globals.css";
 import SearchBar from "@/Components/SearchBar/SearchBar";
 import ImageAvatars from "@/Components/Avatar";
 
 export default function Layout({ children }: any) {
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch("/api/protected", {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          window.location.href = "/login";
+        } else {
+          const content = await response.json();
+          console.log("CONTENT", content);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+        window.location.href = "/login";
+      }
+    })();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Top Bar with Cart and Profile Icon */}
