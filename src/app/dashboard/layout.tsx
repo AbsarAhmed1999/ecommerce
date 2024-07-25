@@ -1,23 +1,25 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import "@/app/globals.css";
 import SearchBar from "@/Components/SearchBar/SearchBar";
 import ImageAvatars from "@/Components/Avatar";
+import CircularIndeterminate from "@/Components/Loading";
 
 export default function Layout({ children }: any) {
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {
       try {
         const response = await fetch("/api/protected", {
           credentials: "include",
         });
-
         if (!response.ok) {
           window.location.href = "/login";
         } else {
           const content = await response.json();
-          console.log("CONTENT", content);
+          // setUser()
+          setLoading(false); // Set loading to false only if authenticated
         }
       } catch (error) {
         console.error("An error occurred:", error);
@@ -25,6 +27,15 @@ export default function Layout({ children }: any) {
       }
     })();
   }, []);
+
+  if (loading) {
+    // Show a loading spinner or some placeholder content while loading
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <CircularIndeterminate />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col">

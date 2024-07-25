@@ -10,6 +10,7 @@ interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
 }
 export default function Login() {
+  const [initialLoading, setInitialLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -22,27 +23,31 @@ export default function Login() {
   };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await fetch("/api/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await fetch("/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
 
-    const result = await response.json();
-    if (response.ok) {
-      console.log("DATA MESSAGE", result);
-      router.push("/dashboard");
-    } else {
-      console.log("Login failed");
+      const result = await response.json();
+      if (response.ok) {
+        router.push("/dashboard");
+      } else {
+        console.log("Login failed");
+      }
+    } catch (e) {
+      console.log("An Error Occurred during login ", e);
     }
   };
 
   return (
     <div>
       <Navbar loggedIn={false} />
-      <div className="min-h-screen flex items-center justify-center bg-blue-100">
+      <div className="min-h-screen flex items-center justify-center bg-gray-800">
         <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
           <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
           <form>
