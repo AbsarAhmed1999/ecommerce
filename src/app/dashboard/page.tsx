@@ -1,20 +1,37 @@
 "use client";
-import Link from "next/link";
-import { useAppSelector } from "../redux/hooks";
+import React from "react";
 import { ProductCard } from "@/Components/ProductCard/ProductCard";
-import ImageAvatars from "@/Components/Avatar";
-import { useEffect } from "react";
-// import Layout from "../components/Layout";
 
-export default function Dashboard() {
-  useEffect(() => {});
+export interface Product {
+  name: string;
+  price: string;
+  sentence: string;
+  emoji: string;
+  id: number;
+}
 
-  const cart = useAppSelector((state) => state.cart);
+export default function Dashboard({
+  filteredData,
+}: {
+  filteredData: Product[];
+}) {
   return (
     <div className="dashboard-page">
-      {/* // Product list */}
-
-      <ProductCard />
+      <div className="product-list">
+        {filteredData.map((value: Product) => {
+          const { name, price, sentence, emoji, id } = value;
+          return (
+            <ProductCard
+              key={id}
+              name={name}
+              price={price}
+              sentence={sentence}
+              emoji={emoji}
+              id={id}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

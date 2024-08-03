@@ -1,20 +1,38 @@
-// components/SearchBar.js
 "use client";
 import React, { useState } from "react";
-import Data from "../../data/mock-data.json";
-import { List } from "./List";
-export default function SearchBar() {
-  const [query, setQuery] = useState("");
-  const [hide, setHide] = useState(true);
-  let isQueryEmpty = true;
+import data from "@/data/mock-data.json";
+import { Product } from "@/app/dashboard/page";
+
+export default function SearchBar({
+  setQuery,
+}: {
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+}) {
+  const [localQuery, setLocalQuery] = useState("");
+  const [filteredData, setFilteredData] = useState<Product[]>(data);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
+    const query = event.target.value;
+    setLocalQuery(query);
+
+    const result = data.filter((item) =>
+      item.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredData(result);
+
+    // If query is empty, show all products
+    setQuery(query);
   };
 
   const handleSearch = (event: React.FormEvent) => {
     event.preventDefault();
-    // Implement the search logic here
-    console.log("Search query:", query);
+    setQuery(localQuery);
+  };
+
+  const handleSelectProduct = (productName: string) => {
+    setLocalQuery("");
+    setFilteredData([]);
+    setQuery(productName);
   };
 
   return (
@@ -22,7 +40,7 @@ export default function SearchBar() {
       <div className="relative">
         <input
           type="text"
-          value={query}
+          value={localQuery}
           onChange={handleInputChange}
           placeholder="Search products..."
           className="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -47,9 +65,19 @@ export default function SearchBar() {
           </svg>
         </button>
       </div>
-      <div className="z-50 absolute ml-2 w-96 mt-2">
-        <List query={query} />
-      </div>
+      {localQuery && (
+        <ul className="absolute z-50 bg-white shadow-lg rounded-lg p-2 w-full max-w-md mt-2">
+          {filteredData.map((product) => (
+            <li
+              key={product.id}
+              className="cursor-pointer p-2 hover:bg-gray-200"
+              onClick={() => handleSelectProduct(product.name)}
+            >
+              {product.name}
+            </li>
+          ))}
+        </ul>
+      )}
     </form>
   );
 }

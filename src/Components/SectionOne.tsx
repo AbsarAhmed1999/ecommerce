@@ -1,10 +1,11 @@
 import React from "react";
 import "@/app/globals.css";
+import { motion } from "framer-motion";
 export default function SectionOne() {
   return (
     <div className="flex flex-col md:flex-column lg:flex-row justify-between items-center p-6 md:p-11 bg-gray-800">
       <div className="flex-1 flex flex-col justify-center items-start text-white p-6 md:p-10">
-        <p>
+        <motion.p animate={{}}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, facere
           consequuntur. Sapiente aliquam qui amet similique commodi culpa
           laborum voluptatibus sed, eos tempora necessitatibus, omnis aliquid
@@ -16,7 +17,7 @@ export default function SectionOne() {
           adipisicing elit. Velit, facere consequuntur. Sapiente aliquam qui
           amet similique commodi culpa laborum voluptatibus sed, eos tempora
           necessitatibus, omnis aliquid nostrum pariatur, odio
-        </p>
+        </motion.p>
       </div>
       <div className="flex-1 flex justify-center items-center  md:p-10">
         <div className="w-full sm:w-[400px]">

@@ -1,4 +1,17 @@
-export function ProductCard() {
+interface productProps {
+  id: number;
+  name: string;
+  emoji: string;
+  price: string;
+  sentence: string;
+}
+export function ProductCard({
+  id,
+  name,
+  emoji,
+  price,
+  sentence,
+}: productProps) {
   return (
     <div className="relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
       <a
@@ -7,7 +20,7 @@ export function ProductCard() {
       >
         <img
           className="object-cover"
-          src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+          src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="product image"
         />
         <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
@@ -16,13 +29,11 @@ export function ProductCard() {
       </a>
       <div className="mt-4 px-5 pb-5">
         <a href="#">
-          <h5 className="text-xl tracking-tight text-slate-900">
-            Nike Air MX Super 2500 - Red
-          </h5>
+          <h5 className="text-xl tracking-tight text-slate-900">{name}</h5>
         </a>
         <div className="mt-2 mb-5 flex items-center justify-between">
           <p>
-            <span className="text-3xl font-bold text-slate-900">$449</span>
+            <span className="text-3xl font-bold text-slate-900">{price}</span>
             <span className="text-sm text-slate-900 line-through">$699</span>
           </p>
           <div className="flex items-center">
