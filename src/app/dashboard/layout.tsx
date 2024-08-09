@@ -2,41 +2,38 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import "@/app/globals.css";
+import { useSelector } from "react-redux";
+import { selectCartItemsCount } from "@/app/redux/slices/Cart/index"; // adjust this path based on your actual file structure
 import SearchBar from "@/Components/SearchBar/SearchBar";
 import ImageAvatars from "@/Components/Avatar";
 import CircularIndeterminate from "@/Components/Loading";
 import Dashboard from "@/app/dashboard/page";
 import data from "@/data/mock-data.json";
+import { useAuthCheck } from "../Auth/useAuthCheck";
+
+interface filteredData {
+  name: string;
+  price: string;
+  sentence: string;
+  image: string;
+  id: number;
+}
 
 export default function Layout({ children }: any) {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
-  const [filteredData, setFilteredData] = useState(data);
+  const [filteredData, setFilteredData] = useState<filteredData[]>(data);
+  const cartItemCount = useSelector(selectCartItemsCount); // Get the cart item count from Redux store
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch("/api/protected", {
-          credentials: "include",
-        });
-        if (!response.ok) {
-          window.location.href = "/login";
-        } else {
-          const content = await response.json();
-          setLoading(false); // Set loading to false only if authenticated
-        }
-      } catch (error) {
-        console.error("An error occurred:", error);
-        window.location.href = "/login";
-      }
-    })();
-  }, []);
-
+  console.log(filteredData);
+  console.log("CartItemCount", cartItemCount);
+  const loading = useAuthCheck();
   useEffect(() => {
     const result = data.filter((item) =>
       item.name.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredData(result);
+    console.log(result);
   }, [query]);
 
   if (loading) {
@@ -55,6 +52,11 @@ export default function Layout({ children }: any) {
         <Link href="/cart">
           <div className="relative h-8 w-8 mr-4 cursor-pointer">
             <img src="/trolley.png" />
+            {cartItemCount > 0 && (
+              <div className="absolute top-0 right-0 h-4 w-4 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">
+                {cartItemCount}
+              </div>
+            )}
           </div>
         </Link>
         <Link href="/profile">

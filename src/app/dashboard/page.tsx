@@ -6,7 +6,7 @@ export interface Product {
   name: string;
   price: string;
   sentence: string;
-  emoji: string;
+  image: string;
   id: number;
 }
 
@@ -19,15 +19,15 @@ export default function Dashboard({
     <div className="dashboard-page">
       <div className="product-list">
         {filteredData.map((value: Product) => {
-          const { name, price, sentence, emoji, id } = value;
+          const { name, price, image, sentence, id } = value;
           return (
             <ProductCard
-              key={id}
+              key={id} // added key prop
+              id={id}
               name={name}
               price={price}
               sentence={sentence}
-              emoji={emoji}
-              id={id}
+              image={image}
             />
           );
         })}

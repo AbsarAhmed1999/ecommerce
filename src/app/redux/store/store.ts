@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { CartSlice } from "../slices/Cart";
+import { CartSlice } from "../slices/Cart/index";
 // import todoReducer from "./features/todo-slice";
 
 export const store = configureStore({

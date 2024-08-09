@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import "@/app/globals.css";
 import Navbar from "@/Components/Navbar/navbar";
 import { useRouter } from "next/navigation";
 import { JwtAuthService } from "../utils/jwt-service";
+import CircularIndeterminate from "@/Components/Loading";
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
@@ -14,6 +15,35 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch("/api/protected", {
+          credentials: "include",
+        });
+        if (!response.ok) {
+          router.push("/login");
+        } else {
+          setTimeout(() => {
+            setLoading(false);
+          }, 2000);
+          router.push("/dashboard");
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+        router.push("/login");
+      }
+    })();
+  });
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <CircularIndeterminate />
+      </div>
+    );
+  }
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
