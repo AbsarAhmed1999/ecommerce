@@ -46,45 +46,70 @@ import { RootState } from "@/app/redux/store/store";
 export interface CartItem {
   id: number;
   name: string;
-  price: string;
-  // image: string;
+  price: number;
   image: string;
   sentence: string;
+  quantity: number;
 }
 
 export interface CartState {
   items: CartItem[];
+  totalAmount: number;
 }
 
 const initialState: CartState = {
   items: [],
+  totalAmount: 0,
 };
 
 export const CartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<Omit<CartItem, "quantity">>) => {
-      state.items.push(action.payload);
-      // if (itemIndex >= 0) {
-      //   state.items[itemIndex].quantity += 1;
-      // } else {
-      //   const newItem = { ...action.payload, quantity: 1 };
-      //   state.items.push(newItem);
-      // }
+    addItem: (state, action: PayloadAction<CartItem>) => {
+      const newItem = action.payload;
+      const existingItem = state.items.find((item) => item.id === newItem.id);
+
+      if (!existingItem) {
+        state.items.push({
+          ...newItem,
+          quantity: 1,
+        });
+      } else {
+        existingItem.quantity++;
+      }
+
+      state.totalAmount += newItem.price; // Directly add price without conversion
     },
     removeItem: (state, action: PayloadAction<{ id: number }>) => {
-      // state.items = state.items.filter((item) => item.id !== action.payload.id);
-      state.items = state.items.filter((item) => item.id !== action.payload.id);
+      const existingItem = state.items.find(
+        (item) => item.id === action.payload.id
+      );
+
+      if (existingItem) {
+        state.totalAmount -= existingItem.price; // Directly subtract price without conversion
+        if (existingItem.quantity === 1) {
+          state.items = state.items.filter(
+            (item) => item.id !== action.payload.id
+          );
+        } else {
+          existingItem.quantity--;
+        }
+      }
+    },
+    clearCart: (state) => {
+      state.items = [];
+      state.totalAmount = 0;
     },
   },
 });
 
-export const { addItem, removeItem } = CartSlice.actions;
+export const { addItem, removeItem, clearCart } = CartSlice.actions;
 
 // Selector to get cart items
 export const selectCartItems = (state: RootState) => state.cart.items;
-export const selectCartItemsCount = (state: { cart: CartState }) =>
+export const selectCartItemsCount = (state: RootState) =>
   state.cart.items.length;
+export const selectTotalAmount = (state: RootState) => state.cart.totalAmount;
 
 export default CartSlice.reducer;

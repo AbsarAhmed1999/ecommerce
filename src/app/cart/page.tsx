@@ -17,6 +17,10 @@ const CartPage = () => {
   };
   const loading = useAuthCheck();
 
+  const totalAmount = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -47,6 +51,7 @@ const CartPage = () => {
                   <div className="ml-4">
                     <h2 className="text-lg font-semibold">{item.name}</h2>
                     <p className="text-gray-600">{item.price}</p>
+                    <p>Quantity: {item.quantity}</p>
                   </div>
                 </div>
                 <div>
@@ -60,6 +65,7 @@ const CartPage = () => {
               </li>
             ))}
           </ul>
+          <div>TOTAL AMOUNT : {totalAmount}</div>
         </div>
       )}
     </div>

@@ -15,29 +15,30 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch("/api/protected", {
+        const response = await fetch("/api/check-token", {
           credentials: "include",
         });
-        if (!response.ok) {
-          router.push("/login");
-        } else {
-          setTimeout(() => {
-            setLoading(false);
-          }, 2000);
+        console.log("RESPONSE", response.ok);
+        if (response.ok) {
           router.push("/dashboard");
+          setTimeout(() => {
+            setInitialLoading(false);
+          }, 2000);
+        } else {
+          router.push("/login");
+          setInitialLoading(false);
         }
       } catch (error) {
         console.error("An error occurred:", error);
         router.push("/login");
       }
     })();
-  });
+  }, []);
 
-  if (loading) {
+  if (initialLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <CircularIndeterminate />

@@ -36,6 +36,7 @@ export default function Layout({ children }: any) {
     console.log(result);
   }, [query]);
 
+  console.log("LOADING INSIDE DASHOARD", loading);
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
