@@ -10,6 +10,7 @@ export async function loginUserService(userLoginCredentials: login) {
   const { email, password } = userLoginCredentials;
   // check if user exist ?
   const userExist = await User.findOne({ email });
+  console.log("USER EXIST", userExist);
   if (!userExist) {
     throw new Error("Please Register First & than Login");
   } else {

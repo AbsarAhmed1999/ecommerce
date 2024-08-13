@@ -10,6 +10,9 @@ import CircularIndeterminate from "@/Components/Loading";
 import Dashboard from "@/app/dashboard/page";
 import data from "@/data/mock-data.json";
 import { useAuthCheck } from "../Auth/useAuthCheck";
+import { useRouter } from "next/navigation";
+import { RootState } from "../redux/store/store";
+import { selectUser } from "../redux/slices/User";
 
 interface filteredData {
   name: string;
@@ -25,18 +28,19 @@ export default function Layout({ children }: any) {
   const [filteredData, setFilteredData] = useState<filteredData[]>(data);
   const cartItemCount = useSelector(selectCartItemsCount); // Get the cart item count from Redux store
 
-  console.log(filteredData);
-  console.log("CartItemCount", cartItemCount);
   const loading = useAuthCheck();
+  const user = useSelector(selectUser);
+  console.log("USER DEFINED HERE", user);
+  const profileImage = user.profileImage;
   useEffect(() => {
     const result = data.filter((item) =>
       item.name.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredData(result);
-    console.log(result);
   }, [query]);
 
-  console.log("LOADING INSIDE DASHOARD", loading);
+  useEffect(() => {}, []);
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -61,8 +65,11 @@ export default function Layout({ children }: any) {
           </div>
         </Link>
         <Link href="/profile">
-          <div className="relative h-10 w-10 cursor-pointer">
-            <ImageAvatars />
+          <div className="relative h-10 w-10 cursor-pointer ">
+            {/* {user.user} */}
+
+            <img src={`${profileImage}`} width={`500px`} height={`80px`} />
+            {/* <ImageAvatars profileImage={profileImage} /> */}
           </div>
         </Link>
       </div>

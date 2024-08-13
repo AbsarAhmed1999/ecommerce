@@ -4,10 +4,11 @@ import { ProductCard } from "@/Components/ProductCard/ProductCard";
 
 export interface Product {
   name: string;
-  price: string;
+  price: number;
   sentence: string;
   image: string;
   id: number;
+  quantity: number;
 }
 
 export default function Dashboard({
@@ -19,7 +20,7 @@ export default function Dashboard({
     <div className="dashboard-page">
       <div className="product-list">
         {filteredData.map((value: Product) => {
-          const { name, price, image, sentence, id } = value;
+          const { name, price, image, sentence, id, quantity } = value;
           return (
             <ProductCard
               key={id} // added key prop
@@ -28,6 +29,7 @@ export default function Dashboard({
               price={price}
               sentence={sentence}
               image={image}
+              quantity={quantity}
             />
           );
         })}

@@ -3,10 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
-import { selectCartItems, removeItem } from "@/app/redux/slices/Cart"; // adjust this path based on your actual file structure
+import {
+  selectCartItems,
+  removeItem,
+  clearCart,
+} from "@/app/redux/slices/Cart"; // adjust this path based on your actual file structure
 import CircularIndeterminate from "@/Components/Loading";
 import { useAuthCheck } from "../Auth/useAuthCheck";
-
+import { Button } from "@mui/material";
 const CartPage = () => {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(selectCartItems);
@@ -20,6 +24,10 @@ const CartPage = () => {
   const totalAmount = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
+
+  const clearAllItems = () => {
+    dispatch(clearCart());
+  };
 
   if (loading) {
     return (
@@ -68,6 +76,10 @@ const CartPage = () => {
           <div>TOTAL AMOUNT : {totalAmount}</div>
         </div>
       )}
+      {/* <button onClick={clearAllItems}>Clear All Items</button> */}
+      <Button onClick={clearAllItems} variant="contained" size="medium">
+        Clear all Items
+      </Button>
     </div>
   );
 };

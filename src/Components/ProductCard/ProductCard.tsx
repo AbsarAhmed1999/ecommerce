@@ -5,8 +5,9 @@ interface ProductProps {
   id: number;
   name: string;
   image: string;
-  price: string;
+  price: number;
   sentence: string;
+  quantity: number;
 }
 
 export function ProductCard({
@@ -15,11 +16,21 @@ export function ProductCard({
   image,
   price,
   sentence,
+  quantity,
 }: ProductProps) {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    dispatch(addItem({ id, name, image, price, sentence }));
+    dispatch(
+      addItem({
+        id,
+        name,
+        image,
+        price,
+        sentence,
+        quantity,
+      })
+    );
   };
 
   return (

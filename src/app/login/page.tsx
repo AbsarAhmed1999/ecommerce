@@ -6,6 +6,8 @@ import Navbar from "@/Components/Navbar/navbar";
 import { useRouter } from "next/navigation";
 import { JwtAuthService } from "../utils/jwt-service";
 import CircularIndeterminate from "@/Components/Loading";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/slices/User";
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
@@ -15,6 +17,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
       try {
@@ -67,6 +70,7 @@ export default function Login() {
       const result = await response.json();
       if (response.ok) {
         router.push("/dashboard");
+        dispatch(setUser(result.user));
       } else {
         console.log("Login failed");
       }
