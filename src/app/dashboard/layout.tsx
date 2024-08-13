@@ -13,6 +13,7 @@ import { useAuthCheck } from "../Auth/useAuthCheck";
 import { useRouter } from "next/navigation";
 import { RootState } from "../redux/store/store";
 import { selectUser } from "../redux/slices/User";
+import Avatar from "@/Components/Avatar";
 
 interface filteredData {
   name: string;
@@ -68,8 +69,7 @@ export default function Layout({ children }: any) {
           <div className="relative h-10 w-10 cursor-pointer ">
             {/* {user.user} */}
 
-            <img src={`${profileImage}`} width={`500px`} height={`80px`} />
-            {/* <ImageAvatars profileImage={profileImage} /> */}
+            <Avatar profileImage={profileImage} />
           </div>
         </Link>
       </div>

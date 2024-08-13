@@ -1,11 +1,15 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
 
-export default function ImageAvatars(profileImage: string) {
+interface AvatarProps {
+  profileImage: string | null; // Accepting string or null as the type
+}
+
+export default function Avatar({ profileImage }: AvatarProps) {
   return (
-    <Stack direction="row">
-      {/* <Avatar alt="" src={`${profileImage}`} /> */}
-    </Stack>
+    <img
+      className="w-10 h-10 rounded-full"
+      src={`${profileImage}`}
+      alt="Rounded avatar"
+    />
   );
 }
