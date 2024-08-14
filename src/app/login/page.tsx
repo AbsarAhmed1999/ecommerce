@@ -16,6 +16,7 @@ export default function Login() {
   const [initialLoading, setInitialLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -32,6 +33,7 @@ export default function Login() {
           }, 2000);
         } else {
           router.push("/login");
+
           setInitialLoading(false);
         }
       } catch (error) {
@@ -72,6 +74,7 @@ export default function Login() {
         router.push("/dashboard");
         dispatch(setUser(result.user));
       } else {
+        setError(true);
         console.log("Login failed");
       }
     } catch (e) {
@@ -120,6 +123,11 @@ export default function Login() {
                 required
               />
             </div>
+            {error && (
+              <p className="text-red-600 font-semibold mb-5">
+                Incorrect password
+              </p>
+            )}
             <button
               type="submit"
               onClick={handleSubmit}

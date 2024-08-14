@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { RootState } from "../redux/store/store";
 import { selectUser } from "../redux/slices/User";
 import Avatar from "@/Components/Avatar";
+import ProfileDropdown from "@/Components/ProfileDropDown";
 
 interface filteredData {
   name: string;
@@ -28,10 +29,10 @@ export default function Layout({ children }: any) {
   const [query, setQuery] = useState("");
   const [filteredData, setFilteredData] = useState<filteredData[]>(data);
   const cartItemCount = useSelector(selectCartItemsCount); // Get the cart item count from Redux store
-
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const loading = useAuthCheck();
   const user = useSelector(selectUser);
-  console.log("USER DEFINED HERE", user);
+  // console.log("USER DEFINED HERE", user);
   const profileImage = user.profileImage;
   useEffect(() => {
     const result = data.filter((item) =>
@@ -39,8 +40,6 @@ export default function Layout({ children }: any) {
     );
     setFilteredData(result);
   }, [query]);
-
-  useEffect(() => {}, []);
 
   if (loading) {
     return (
@@ -50,36 +49,47 @@ export default function Layout({ children }: any) {
     );
   }
 
-  return (
-    <div className="min-h-screen flex flex-col">
-      {/* Top Bar with Cart and Profile Icon */}
-      <div className="flex justify-end items-center p-4 bg-gray-200">
-        <SearchBar setQuery={setQuery} />
-        <Link href="/cart">
-          <div className="relative h-8 w-8 mr-4 cursor-pointer">
-            <img src="/trolley.png" />
-            {cartItemCount > 0 && (
-              <div className="absolute top-0 right-0 h-4 w-4 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">
-                {cartItemCount}
-              </div>
-            )}
-          </div>
-        </Link>
-        <Link href="/profile">
-          <div className="relative h-10 w-10 cursor-pointer ">
-            {/* {user.user} */}
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
-            <Avatar profileImage={profileImage} />
+  return (
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      {/* Top Navigation Bar */}
+      <div className="flex justify-between items-center p-6 bg-white shadow-md">
+        <div className="flex-1 flex justify-center">
+          <SearchBar setQuery={setQuery} />
+        </div>
+        <div className="flex items-center space-x-6">
+          <Link href="/cart">
+            <div className="relative h-10 w-10 cursor-pointer">
+              <img
+                src="/trolley.png"
+                className="w-full h-full object-contain"
+              />
+              {cartItemCount > 0 && (
+                <div className="absolute top-0 right-0 h-5 w-5 bg-red-600 text-white text-xs flex items-center justify-center rounded-full">
+                  {cartItemCount}
+                </div>
+              )}
+            </div>
+          </Link>
+          <div className="relative">
+            <Avatar
+              profileImage={profileImage}
+              toggleDropdown={toggleDropdown}
+            />
+            <ProfileDropdown
+              isOpen={isDropdownOpen}
+              toggleDropdown={toggleDropdown}
+            />
           </div>
-        </Link>
+        </div>
       </div>
 
-      {/* Centered Content */}
-      <div className="flex-grow flex flex-col items-center">
-        <div className="w-full max-w-2xl p-4"></div>
-        <div className="w-full max-w-4xl p-4 flex-grow">
-          <Dashboard filteredData={filteredData} />
-        </div>
+      {/* Main Dashboard Content */}
+      <div className="flex-grow p-6 mt-6 w-full max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
+        <Dashboard filteredData={filteredData} />
       </div>
     </div>
   );
