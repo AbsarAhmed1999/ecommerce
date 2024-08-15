@@ -1,12 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
-
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import "@/app/globals.css";
 import Navbar from "@/Components/Navbar/navbar";
+import CircularIndeterminate from "@/Components/Loading";
 // import Navbar from "@/Components/Navbar/navbar";
 // Define Yup schema for validation
 const validationSchema = Yup.object().shape({
@@ -27,6 +29,7 @@ interface Values {
 
 const RegistrationForm = () => {
   const router = useRouter();
+  const [initialLoading, setInitialLoading] = useState(false);
   const intialValue: Values = {
     fullName: "",
     email: "",
@@ -48,10 +51,30 @@ const RegistrationForm = () => {
 
       if (!result.ok) {
         console.error("Registration failed");
+        Swal.fire({
+          title: "Registration Failed!",
+          text: "Please try again.",
+          icon: "error",
+        });
       } else {
         const data = await result.json();
         localStorage.setItem("token", data.token);
-        router.push("/dashboard"); // Adjust the path as needed
+        setInitialLoading(true);
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Registered Successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        }).then(() => {
+          setTimeout(() => {
+            router.push("/login");
+            setInitialLoading(false);
+          }, 3000);
+        });
+
+        // Adjust the path as needed
         console.log("User registered successfully");
       }
     } catch (error) {
@@ -61,9 +84,14 @@ const RegistrationForm = () => {
     }
   };
 
-  const handleHomeClick = () => {
-    router.push("/"); // Redirect to home page
-  };
+  if (initialLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <CircularIndeterminate />
+      </div>
+    );
+  }
+
   const handleRegiser = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
   };
