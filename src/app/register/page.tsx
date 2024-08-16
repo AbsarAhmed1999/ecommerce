@@ -1,11 +1,9 @@
 "use client";
-
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import "@/app/globals.css";
 import Navbar from "@/Components/Navbar/navbar";
 import CircularIndeterminate from "@/Components/Loading";
