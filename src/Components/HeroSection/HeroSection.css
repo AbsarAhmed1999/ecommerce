@@ -1,0 +1,73 @@
+/* HeroSection.css */
+
+/* Reset margin and padding */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.background-image {
+  position: absolute; /* Position relative to the container */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure image covers the container */
+  display: block; /* Remove any extra space below the image */
+}
+
+.glow-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 0, 0.3); /* Yellow color with opacity */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+  filter: blur(10px);
+}
+
+.glow-button:hover::before {
+  opacity: 1;
+}
+
+.glow-button {
+  /* color: #000; */
+  /* background-color: #fcd34d; Tailwind yellow-400 */
+  /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); */
+  /* transition: box-shadow 0.3s ease; */
+  /* z-index: 1; */
+}
+
+.glow-button:hover {
+  /* box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);  */
+  box-shadow: 0 0 20px rgba(255, 221, 51, 1); /* More intense yellow glow */
+  transform: scale(1.05); /* Slight scale-up effect on hover */
+}

@@ -64,13 +64,6 @@ export default function Login() {
     email: Yup.string().email("Invalid Email").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.currentTarget.value);
-  };
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.currentTarget.value);
-  };
   const handleSubmit = async (
     values: LoginValues,
     { setSubmitting }: FormikHelpers<LoginValues>
@@ -87,16 +80,19 @@ export default function Login() {
       });
 
       const result = await response.json();
+      console.log("YEH MERA RESULT0", result);
       if (response.ok) {
         Swal.fire({
           position: "center",
           icon: "success",
           title: "Login Successful!",
           showConfirmButton: false,
-          timer: 1500,
+          timer: 3000,
         }).then(() => {
+          setInitialLoading(true);
           setTimeout(() => {
             router.push("/dashboard");
+            setInitialLoading(false);
           }, 1000);
         });
         dispatch(setUser(result.user));
@@ -121,7 +117,7 @@ export default function Login() {
 
   return (
     <div>
-      <Navbar loggedIn={false} />
+      {/* <Navbar loggedIn={false} /> */}
       <div className="min-h-screen flex items-center justify-center bg-gray-800">
         <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
           <h2 className="text-2xl font-bold text-center mb-6">Login</h2>

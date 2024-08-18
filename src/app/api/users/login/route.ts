@@ -5,15 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { token, user } = await loginUserService(body);
-    const date = new Date();
-    const response = NextResponse.json({ user }, { status: 201 });
-    response.cookies.set("token", token, {
-      httpOnly: true,
-      secure: true,
-      maxAge: 60 * 60,
-      path: "/",
-    });
+    const response = await loginUserService(body);
     return response;
   } catch (error) {
     console.error("Error in API route:", error); // Log the error for debugging

@@ -46,7 +46,6 @@ const RegistrationForm = () => {
         },
         body: JSON.stringify(values),
       });
-
       if (!result.ok) {
         console.error("Registration failed");
         Swal.fire({
@@ -64,7 +63,7 @@ const RegistrationForm = () => {
           icon: "success",
           title: "Registered Successfully!",
           showConfirmButton: false,
-          timer: 1500,
+          timer: 2500,
         }).then(() => {
           setTimeout(() => {
             router.push("/login");

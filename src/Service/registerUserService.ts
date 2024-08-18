@@ -1,6 +1,7 @@
 import { JwtAuthService } from "@/app/utils/jwt-service";
 import User from "@/model/User";
 import bcrypt from "bcrypt";
+import { NextResponse } from "next/server";
 
 interface UserInput {
   fullName: string;
@@ -20,7 +21,10 @@ export async function registerUserService(userInput: UserInput) {
   const userExist = await User.findOne({ email: email });
 
   if (userExist) {
-    return "USER already Exist";
+    return NextResponse.json(
+      { error: "User already exists with this email" },
+      { status: 409 }
+    );
   }
 
   const salt = 10;
