@@ -23,6 +23,7 @@ interface LoginValues {
 
 export default function Login() {
   const [initialLoading, setInitialLoading] = useState(true);
+  const [redirecting, setRedirecting] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -36,13 +37,11 @@ export default function Login() {
         });
         console.log("RESPONSE", response.ok);
         if (response.ok) {
-          router.push("/dashboard");
+          setRedirecting(true);
           setTimeout(() => {
-            setInitialLoading(false);
-          }, 2000);
+            router.push("/dashboard");
+          }, 500); // Short delay to show loader
         } else {
-          router.push("/login");
-
           setInitialLoading(false);
         }
       } catch (error) {
@@ -51,14 +50,6 @@ export default function Login() {
       }
     })();
   }, []);
-
-  if (initialLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <CircularIndeterminate />
-      </div>
-    );
-  }
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid Email").required("Email is required"),
@@ -89,11 +80,11 @@ export default function Login() {
           showConfirmButton: false,
           timer: 3000,
         }).then(() => {
-          setInitialLoading(true);
+          setInitialLoading(true); // Show loader before redirect
+          setRedirecting(true); // Start redirect process
           setTimeout(() => {
             router.push("/dashboard");
-            setInitialLoading(false);
-          }, 1000);
+          }, 1000); // Short delay to show loader
         });
         dispatch(setUser(result.user));
       } else {
@@ -115,12 +106,73 @@ export default function Login() {
     password: "",
   };
 
+  if (initialLoading || redirecting) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <CircularIndeterminate />
+      </div>
+    );
+  }
+
   return (
-    <div>
-      {/* <Navbar loggedIn={false} /> */}
-      <div className="min-h-screen flex items-center justify-center bg-gray-800">
-        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-          <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
+    <div
+      className="min-h-screen flex items-center  "
+      style={{ backgroundColor: "#262054 " }}
+    >
+      {/* Circles positioned absolutely */}
+      <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2 flex flex-col items-center space-y-8">
+        {/* Circle with gradient 1 */}
+        <div
+          className="absolute bottom-[100px] w-32 h-32 rounded-full flex items-center justify-center"
+          style={{
+            background: "linear-gradient(135deg, #ff7e5f, #feb47b)", // Gradient from coral to light peach
+            boxShadow: `
+            0 0 15px rgba(255, 165, 0, 0.6), 
+            0 0 30px rgba(255, 165, 0, 0.4), 
+            0 0 60px rgba(255, 165, 0, 0.2)
+          `,
+          }}
+        ></div>
+
+        {/* Circle with gradient 2 */}
+        <div
+          className="absolute  top-0 w-24 h-24 rounded-full flex items-center justify-center"
+          style={{
+            background: "linear-gradient(135deg, #00aaff, #004e92)", // Gradient from light blue to dark blue
+            boxShadow: `
+            0 0 15px rgba(0, 170, 255, 0.6), 
+            0 0 30px rgba(0, 170, 255, 0.4), 
+            0 0 60px rgba(0, 170, 255, 0.2)
+          `,
+          }}
+        ></div>
+
+        {/* Circle with gradient 3 */}
+        <div
+          className="absolute left-28 bottom-[-60px] w-40 h-40 rounded-full flex items-center justify-center"
+          style={{
+            // background: "linear-gradient(135deg, #000000, #434343)", // Gradient from black to gray
+            background: "linear-gradient(135deg, #7F00FF, #E100FF)",
+            //   boxShadow: `
+            //   0 0 15px rgba(255, 255, 255, 0.6),
+            //   0 0 30px rgba(255, 255, 255, 0.4),
+            //   0 0 60px rgba(255, 255, 255, 0.2)
+            // `,
+          }}
+        ></div>
+      </div>
+      <div>
+        <img src="./line.png" className="ml-[620px]" />
+      </div>
+
+      <div
+        className="absolute right-72 w-96 h-auto p-5 rounded-lg "
+        style={{ backgroundColor: "#262054" }}
+      >
+        <div className="flex flex-col gap-4">
+          <h1 className="text-4xl font-bold mb-4 ml-16 text-white">LOGIN</h1>
+          <img src="./login-logo.png" className="w-40 ml-10" />
+          {/* Login Form */}
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -128,75 +180,53 @@ export default function Login() {
           >
             {({ isSubmitting }) => (
               <Form>
-                <div className="mb-4">
-                  <label
-                    htmlFor="email"
-                    className="block text-gray-700 font-bold mb-2"
-                  >
-                    Email
-                  </label>
+                <div className="flex flex-col gap-4 mb-5">
                   <Field
                     type="email"
                     id="email"
                     name="email"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="email"
+                    className="p-2 border border-white rounded-full placeholder-gray-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300"
                   />
                   <ErrorMessage
                     name="email"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-red-500 font-bold text-base"
                   />
                 </div>
-
-                <div className="mb-4">
-                  <label
-                    htmlFor="password"
-                    className="block text-gray-700 font-bold mb-2"
-                  >
-                    Password
-                  </label>
+                <div className="flex flex-col gap-4">
                   <Field
                     type="password"
                     id="password"
                     name="password"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="password"
+                    className="p-2 border border-white rounded-full placeholder-gray-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300"
                   />
                   <ErrorMessage
                     name="password"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-red-500 font-bold text-base "
                   />
                 </div>
-
-                {/* Forgot Password Link */}
-                <div className="mb-6 text-right">
-                  <a
-                    href="/forgot-password" // Adjust this path as needed
-                    className="text-blue-500 hover:underline text-sm"
-                  >
-                    Forgot Password?
-                  </a>
-                </div>
-
+                <button className=" text-white hover:underline focus:outline-none hover:text-blue-700 mt-5">
+                  Forgot password ?
+                </button>
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200"
+                  className="w-80 mt-4 p-2 px-4 bg-pink-500 border border-white rounded-full text-white font-semibold text-lg hover:bg-pink-400 "
                 >
                   {isSubmitting ? "Logging in..." : "Login"}
                 </button>
-                <p className="text-center text-gray-600 mt-4">
-                  Don't have an account?{" "}
-                  <Link
-                    href="/register"
-                    className="text-blue-500 hover:underline"
-                  >
-                    Register
-                  </Link>
-                </p>
               </Form>
             )}
-          </Formik>{" "}
+          </Formik>
+
+          <Link href="/register" passHref>
+            {" "}
+            <a className="text-white underline hover:text-blue-700 ml-10">
+              Don't Have Account ? Register Now
+            </a>
+          </Link>
         </div>
       </div>
     </div>
