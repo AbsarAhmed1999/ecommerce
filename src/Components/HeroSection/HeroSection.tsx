@@ -4,15 +4,6 @@ import "./HeroSection.css";
 import Link from "next/link";
 
 export default function HeroSection() {
-  // Animation variants for sliding in from the left
-  // const variants = {
-  //   hidden: { x: "-100vw", opacity: 0 },
-  //   visible: {
-  //     x: "0%",
-  //     opacity: 1,
-  //     transition: { duration: 1, ease: "easeOut" },
-  //   },
-  // };
   const variants = {
     hidden: { x: "-100vw", opacity: 0 },
     visible: {

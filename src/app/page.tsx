@@ -1,16 +1,11 @@
 "use client";
-import Contact from "@/Components/Contact";
-import Navbar from "@/Components/Navbar/navbar";
-import SectionOne from "@/Components/SectionOne";
-import Footer from "@/Components/footer/footer";
-import Carousel from "@/Components/reactCrousel/Craousel";
-import Image from "next/image";
 import "@/app/globals.css";
 import AboutUs from "@/Components/AboutUs";
+import CustomerReviews from "@/Components/CustomerReviews/CustomerReviews";
+import Footer from "@/Components/footer/footer";
 import HeroSection from "@/Components/HeroSection/HeroSection";
 import ProductSection from "@/Components/ProductSection/ProductSection";
 import { useEffect } from "react";
-// import data from "@/data/product.json";
 export default function Home() {
   useEffect(() => {
     const progressBar = document.querySelector(
@@ -43,6 +38,8 @@ export default function Home() {
       <HeroSection />
       <AboutUs />
       <ProductSection />
+      <CustomerReviews />
+      <Footer />
     </div>
   );
 }

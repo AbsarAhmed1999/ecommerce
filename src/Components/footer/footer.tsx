@@ -3,34 +3,40 @@ import { FaFacebook, FaInstagram } from "react-icons/fa"; // Importing react-ico
 
 export default function Footer() {
   return (
-    <div className="bg-gray-900 mt-2 text-white p-6">
+    <footer className="bg-[#003366] text-white p-6">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Left section */}
         <div>
           <p className="text-lg font-semibold">XYZ Street</p>
-          <p className="text-sm mt-1 text-gray-400">+922030123021</p>
+          <p className="text-sm mt-1 text-gray-300">+922030123021</p>
         </div>
 
         {/* Right section */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-6">
           <a
             href="https://www.facebook.com"
-            className="text-blue-600 hover:text-blue-400"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-gray-300 transition-colors duration-300"
+            aria-label="Facebook"
           >
             <FaFacebook size={24} />
           </a>
           <a
             href="https://www.instagram.com"
-            className="text-pink-600 hover:text-pink-400"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-gray-300 transition-colors duration-300"
+            aria-label="Instagram"
           >
             <FaInstagram size={24} />
           </a>
-          <div className="flex flex-col text-gray-400">
+          <div className="flex flex-col text-gray-300">
             <p className="text-sm">easymart@gmail.com</p>
             <p className="text-sm">Easy_mart101</p>
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }

@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import Swal from "sweetalert2";
 import "./login.css";
+import BackButton from "@/Components/BackButton/BackButton";
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
@@ -144,6 +145,7 @@ export default function Login() {
       className="min-h-screen flex items-center  "
       style={{ backgroundColor: "#262054 " }}
     >
+      <BackButton className="mb-4 absolute top-10 left-10">Go Back</BackButton>
       {/* Circles positioned absolutely */}
       <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2 flex flex-col items-center space-y-8">
         {/* Circle with gradient 1 */}

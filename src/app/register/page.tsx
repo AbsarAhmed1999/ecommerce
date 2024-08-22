@@ -8,6 +8,7 @@ import "@/app/globals.css";
 import Navbar from "@/Components/Navbar/navbar";
 import CircularIndeterminate from "@/Components/Loading";
 import Link from "next/link";
+import BackButton from "@/Components/BackButton/BackButton";
 // import Navbar from "@/Components/Navbar/navbar";
 // Define Yup schema for validation
 const validationSchema = Yup.object().shape({
@@ -98,48 +99,14 @@ const RegistrationForm = () => {
       className="min-h-screen flex items-center justify-center"
       style={{ backgroundColor: "#262054" }}
     >
-      {/* Circles positioned absolutely */}
-      {/* <div className="absolute top-1/2 left-[1000px] transform -translate-y-1/2 flex flex-col items-center space-y-8">
-        <div
-          className="absolute bottom-[100px] w-32 h-32 rounded-full flex items-center justify-center"
-          style={{
-            background: "linear-gradient(135deg, #ff7e5f, #feb47b)", // Gradient from coral to light peach
-            boxShadow: `
-            0 0 15px rgba(255, 165, 0, 0.6), 
-            0 0 30px rgba(255, 165, 0, 0.4), 
-            0 0 60px rgba(255, 165, 0, 0.2)
-          `,
-          }}
-        ></div>
-
-        <div
-          className="absolute top-0 w-24 h-24 rounded-full flex items-center justify-center"
-          style={{
-            background: "linear-gradient(135deg, #00aaff, #004e92)", // Gradient from light blue to dark blue
-            boxShadow: `
-            0 0 15px rgba(0, 170, 255, 0.6), 
-            0 0 30px rgba(0, 170, 255, 0.4), 
-            0 0 60px rgba(0, 170, 255, 0.2)
-          `,
-          }}
-        ></div>
-
-        <div
-          className="absolute left-28 bottom-[-60px] w-40 h-40 rounded-full flex items-center justify-center"
-          style={{
-            background: "linear-gradient(135deg, #7F00FF, #E100FF)",
-          }}
-        ></div>
-      </div> */}
-
-      {/* <div>
-        <img src="./line.png" className="ml-[620px]" />
-      </div> */}
+      <BackButton className="mb-4 absolute top-10 left-10">Go Back</BackButton>
 
       <div className="absolute right-54 w-96 h-auto p-4 rounded-lg ">
         <div className="flex flex-col gap-4">
-          <h1 className="text-3xl font-bold mb-1 ml-24 text-white">REGISTER</h1>
-          <img src="./login-logo.png" className="w-24 ml-28" />
+          <h1 className="text-3xl font-bold mb-1 ml-16 text-white">
+            REGISTER NOW
+          </h1>
+          <img src="./login-logo.png" className="w-32 ml-28" />
           {/* Registration Form */}
           <Formik
             initialValues={intialValue} // Set initial values

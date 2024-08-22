@@ -1,0 +1,38 @@
+.customer-reviews {
+  background: linear-gradient(
+    to right,
+    #4fd1c5,
+    #2b6cb0
+  ); /* Light gray background for a clean look */
+}
+
+.review-card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.review-card img {
+  border-radius: 50%;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+h2 {
+  color: #1f2937; /* Darker gray for the heading for contrast */
+}
+
+@media (max-width: 768px) {
+  .customer-reviews .grid {
+    grid-template-columns: 1fr;
+  }
+}
