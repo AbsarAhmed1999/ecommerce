@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import "@/app/globals.css";
 import Navbar from "@/Components/Navbar/navbar";
 import CircularIndeterminate from "@/Components/Loading";
+import Link from "next/link";
 // import Navbar from "@/Components/Navbar/navbar";
 // Define Yup schema for validation
 const validationSchema = Yup.object().shape({
@@ -33,6 +34,7 @@ const RegistrationForm = () => {
     email: "",
     password: "",
   };
+
   const handleSubmit = async (
     values: Values,
     { setSubmitting }: FormikHelpers<Values>
@@ -46,6 +48,8 @@ const RegistrationForm = () => {
         },
         body: JSON.stringify(values),
       });
+      console.log("RESULT HAI YEH", result);
+      console.log("RESULT KI BODY", result.body);
       if (!result.ok) {
         console.error("Registration failed");
         Swal.fire({
@@ -89,104 +93,128 @@ const RegistrationForm = () => {
     );
   }
 
-  const handleRegiser = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-  };
-
   return (
-    <div className="bg-gray-800 ">
-      <Navbar loggedIn={false} />
-      <div className=" min-h-screen flex items-center justify-center">
-        <div className="mt-20 bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-          <div className="flex justify-between mb-4">
-            <h2 className="text-2xl font-bold text-center">Register</h2>
-            <div></div>
-          </div>
+    <div
+      className="min-h-screen flex items-center justify-center"
+      style={{ backgroundColor: "#262054" }}
+    >
+      {/* Circles positioned absolutely */}
+      {/* <div className="absolute top-1/2 left-[1000px] transform -translate-y-1/2 flex flex-col items-center space-y-8">
+        <div
+          className="absolute bottom-[100px] w-32 h-32 rounded-full flex items-center justify-center"
+          style={{
+            background: "linear-gradient(135deg, #ff7e5f, #feb47b)", // Gradient from coral to light peach
+            boxShadow: `
+            0 0 15px rgba(255, 165, 0, 0.6), 
+            0 0 30px rgba(255, 165, 0, 0.4), 
+            0 0 60px rgba(255, 165, 0, 0.2)
+          `,
+          }}
+        ></div>
+
+        <div
+          className="absolute top-0 w-24 h-24 rounded-full flex items-center justify-center"
+          style={{
+            background: "linear-gradient(135deg, #00aaff, #004e92)", // Gradient from light blue to dark blue
+            boxShadow: `
+            0 0 15px rgba(0, 170, 255, 0.6), 
+            0 0 30px rgba(0, 170, 255, 0.4), 
+            0 0 60px rgba(0, 170, 255, 0.2)
+          `,
+          }}
+        ></div>
+
+        <div
+          className="absolute left-28 bottom-[-60px] w-40 h-40 rounded-full flex items-center justify-center"
+          style={{
+            background: "linear-gradient(135deg, #7F00FF, #E100FF)",
+          }}
+        ></div>
+      </div> */}
+
+      {/* <div>
+        <img src="./line.png" className="ml-[620px]" />
+      </div> */}
+
+      <div className="absolute right-54 w-96 h-auto p-4 rounded-lg ">
+        <div className="flex flex-col gap-4">
+          <h1 className="text-3xl font-bold mb-1 ml-24 text-white">REGISTER</h1>
+          <img src="./login-logo.png" className="w-24 ml-28" />
+          {/* Registration Form */}
           <Formik
-            initialValues={intialValue}
+            initialValues={intialValue} // Set initial values
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (
               <Form>
-                <div className="mb-4">
-                  <label
-                    htmlFor="fullName"
-                    className="block text-gray-700 font-bold mb-2"
-                  >
-                    Full Name
-                  </label>
+                <div className="flex flex-col gap-1 mb-4">
                   <Field
                     type="text"
                     id="fullName"
                     name="fullName"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Full Name"
+                    className="p-2 border border-gray-300 rounded-full placeholder-gray-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                   />
                   <ErrorMessage
                     name="fullName"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-red-500 font-bold text-base"
                   />
                 </div>
-
-                <div className="mb-4">
-                  <label
-                    htmlFor="email"
-                    className="block text-gray-700 font-bold mb-2"
-                  >
-                    Email
-                  </label>
+                <div className="flex flex-col gap-1 mb-4">
                   <Field
                     type="email"
                     id="email"
                     name="email"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Email"
+                    className="p-2 border border-gray-300 rounded-full placeholder-gray-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                   />
                   <ErrorMessage
                     name="email"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-red-500 font-bold text-base"
                   />
                 </div>
-
-                <div className="mb-6">
-                  <label
-                    htmlFor="password"
-                    className="block text-gray-700 font-bold mb-2"
-                  >
-                    Password
-                  </label>
+                <div className="flex flex-col gap-1 mb-4">
                   <Field
                     type="password"
                     id="password"
                     name="password"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Password"
+                    className="p-2 border border-gray-300 rounded-full placeholder-gray-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                   />
                   <ErrorMessage
                     name="password"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-red-500 font-bold text-base"
                   />
                 </div>
-
                 <button
                   type="submit"
+                  className="w-full  p-2 px-4 bg-pink-500 border border-gray-300 rounded-full text-white font-semibold text-lg hover:bg-pink-400 transition duration-200"
                   disabled={isSubmitting}
-                  className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200"
                 >
-                  {isSubmitting ? "Submitting..." : "Register"}
+                  {isSubmitting ? "Registering..." : "Register"}
                 </button>
               </Form>
             )}
           </Formik>
-          <div className="mt-6 text-center">
+
+          <div className="mt-1 text-center">
             <button
-              onClick={handleRegiser}
+              // onClick={handleRegister}
               className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-200"
             >
               Continue with Google
             </button>
           </div>
+
+          <Link href="/login" legacyBehavior>
+            <a className="text-white underline hover:text-blue-700 block text-center">
+              Already have an account? Log in
+            </a>
+          </Link>
         </div>
       </div>
     </div>

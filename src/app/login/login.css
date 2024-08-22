@@ -1,0 +1,49 @@
+/* Custom styling for SweetAlert2 popup */
+.custom-swal-popup {
+  background-color: #ffffff; /* White background for clean look */
+  border-radius: 8px; /* Rounded corners for a smooth appearance */
+  padding: 1rem; /* Padding around the content */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Custom title styling */
+.custom-swal-title {
+  font-size: 1.25rem; /* Slightly larger font for the title */
+  font-weight: 600; /* Semi-bold title */
+  color: #333; /* Dark color for better readability */
+  margin-bottom: 0.5rem; /* Space below the title */
+}
+
+/* Custom content styling */
+.custom-swal-content {
+  font-size: 1rem; /* Standard font size for content */
+  color: #555; /* Slightly lighter color for text */
+}
+
+/* Custom styling for SweetAlert2 container (error variant) */
+.custom-swal-container-error {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  z-index: 9999; /* Ensure the alert is on top of other content */
+}
+
+/* Custom styling for SweetAlert2 popup (error variant) */
+.custom-swal-popup-error {
+  background-color: #f8d7da; /* Light red background for error */
+  border-radius: 8px; /* Rounded corners for a smooth appearance */
+  padding: 1rem; /* Padding around the content */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Custom title styling for error alert */
+.custom-swal-title-error {
+  font-size: 1.25rem; /* Slightly larger font for the title */
+  font-weight: 600; /* Semi-bold title */
+  color: #721c24; /* Dark red color for error messages */
+  margin-bottom: 0.5rem; /* Space below the title */
+}
+
+/* Custom content styling for error alert */
+.custom-swal-content-error {
+  font-size: 1rem; /* Standard font size for content */
+  color: #856404; /* Medium dark color for text */
+}

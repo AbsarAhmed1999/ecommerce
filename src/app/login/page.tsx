@@ -8,10 +8,10 @@ import { JwtAuthService } from "../utils/jwt-service";
 import CircularIndeterminate from "@/Components/Loading";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/slices/User";
-
 import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import Swal from "sweetalert2";
+import "./login.css";
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
@@ -55,6 +55,47 @@ export default function Login() {
     email: Yup.string().email("Invalid Email").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
+
+  const showLoginFailureAlert = () => {
+    Swal.fire({
+      icon: "error",
+      title: "Login Failed",
+      text: "Invalid email or password. Please try again.",
+      toast: true, // Use toast-style alert for non-blocking notifications
+      position: "top-end", // Position of the toast
+      timer: 3000, // Auto-close after 3 seconds
+      showConfirmButton: false, // Hide confirm button for toast
+      customClass: {
+        container: "custom-swal-container-error", // Custom class for container
+        popup: "custom-swal-popup-error", // Custom class for popup
+        title: "custom-swal-title-error", // Custom class for title
+      },
+    });
+  };
+
+  const showLoginSuccessAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Login Successful!",
+      text: "You have been successfully logged in.",
+      toast: true, // Use toast-style alert for non-blocking notifications
+      position: "top-end", // Position of the toast
+      timer: 3500, // Auto-close after 3 seconds
+      showConfirmButton: false, // Hide confirm button for toast
+      customClass: {
+        container: "custom-swal-container", // Custom container class
+        title: "custom-swal-title", // Custom title class
+        popup: "custom-swal-popup", // Custom popup class for overall styling
+        closeButton: "custom-swal-close-button", // Custom close button class
+      },
+    }).then(() => {
+      setInitialLoading(true); // Show loader before redirect
+      setRedirecting(true); // Start redirect process
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1000); // Short delay to show loader
+    });
+  };
   const handleSubmit = async (
     values: LoginValues,
     { setSubmitting }: FormikHelpers<LoginValues>
@@ -73,27 +114,11 @@ export default function Login() {
       const result = await response.json();
       console.log("YEH MERA RESULT0", result);
       if (response.ok) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Login Successful!",
-          showConfirmButton: false,
-          timer: 3000,
-        }).then(() => {
-          setInitialLoading(true); // Show loader before redirect
-          setRedirecting(true); // Start redirect process
-          setTimeout(() => {
-            router.push("/dashboard");
-          }, 1000); // Short delay to show loader
-        });
+        showLoginSuccessAlert();
         dispatch(setUser(result.user));
       } else {
         console.log("Login failed");
-        Swal.fire({
-          title: "Login Failed!",
-          text: "Please try again.",
-          icon: "error",
-        });
+        showLoginFailureAlert();
       }
     } catch (e) {
       console.log("An Error Occurred during login ", e);
@@ -180,7 +205,7 @@ export default function Login() {
           >
             {({ isSubmitting }) => (
               <Form>
-                <div className="flex flex-col gap-4 mb-5">
+                <div className="flex flex-col gap-1 mb-4">
                   <Field
                     type="email"
                     id="email"
@@ -194,7 +219,7 @@ export default function Login() {
                     className="text-red-500 font-bold text-base"
                   />
                 </div>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-1">
                   <Field
                     type="password"
                     id="password"
@@ -208,7 +233,7 @@ export default function Login() {
                     className="text-red-500 font-bold text-base "
                   />
                 </div>
-                <button className=" text-white hover:underline focus:outline-none hover:text-blue-700 mt-5">
+                <button className=" text-white hover:underline focus:outline-none hover:text-blue-700 mt-3">
                   Forgot password ?
                 </button>
                 <button
