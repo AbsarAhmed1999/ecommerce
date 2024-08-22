@@ -27,6 +27,7 @@ export default function HeroSection() {
       <img
         src="./background1.jpg"
         alt="backgroundImage"
+        loading="lazy"
         className="absolute inset-0 w-full h-full object-cover mix-blend-multiply"
       />
       <div className="absolute inset-0 bg-[rgba(0,0,0,0.8)] flex flex-col items-center justify-center text-white p-10">
@@ -43,7 +44,7 @@ export default function HeroSection() {
             Your Best Ecommerce Website
           </motion.h1>
           <Link href="/login">
-            <button className=" glow-button bg-yellow-500 text-black py-3 px-6 rounded-lg text-lg font-semibold hover:bg-yellow-400 transition duration-300 mt-4">
+            <button className=" bg-yellow-500 text-black py-3 px-6 rounded-lg text-lg font-semibold hover:bg-yellow-400 transition duration-300 mt-4 border-white hover:border-2 ">
               Shop Now
             </button>
           </Link>

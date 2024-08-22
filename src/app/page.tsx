@@ -9,35 +9,37 @@ import "@/app/globals.css";
 import AboutUs from "@/Components/AboutUs";
 import HeroSection from "@/Components/HeroSection/HeroSection";
 import ProductSection from "@/Components/ProductSection/ProductSection";
+import { useEffect } from "react";
 // import data from "@/data/product.json";
 export default function Home() {
-  // const images = [
-  //   "/remove.png",
-  //   "/remove1.png",
-  //   "/remove2.png",
-  //   "/remove.png",
-  //   "/remove1.png",
-  //   "/remove2.png",
-  // ];
+  useEffect(() => {
+    const progressBar = document.querySelector(
+      ".progress"
+    ) as HTMLDivElement | null;
+
+    const updateProgress = () => {
+      if (!progressBar) return; // Check if progressBar is not null
+
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight;
+      const winHeight = window.innerHeight;
+      const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
+
+      progressBar.style.width = `${scrollPercent}%`;
+    };
+
+    window.addEventListener("scroll", updateProgress);
+
+    // Initial update in case the page is loaded with some scroll
+    updateProgress();
+
+    return () => {
+      window.removeEventListener("scroll", updateProgress);
+    };
+  }, []);
   return (
-    // <div>
-    //   <div className="w-full h-auto bg-white pt-28">
-    //     <Navbar loggedIn={false} />
-    //   </div>
-    //   <div className="bg-gray-800 ">
-    //     <SectionOne />
-    //   </div>
-    //   <div>
-    //     <AboutUs />
-    //   </div>
-    //   <div>{/* <Carousel images={images} /> */}</div>
-    //   <div id="contact">
-    //     <Contact />
-    //   </div>
-    //   <Footer />
-    // </div>
     <div>
-      {/* <Navbar loggedIn={false} /> */}
+      <div className="progress"></div>
       <HeroSection />
       <AboutUs />
       <ProductSection />

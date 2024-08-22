@@ -58,14 +58,6 @@ body {
   opacity: 1;
 }
 
-.glow-button {
-  /* color: #000; */
-  /* background-color: #fcd34d; Tailwind yellow-400 */
-  /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); */
-  /* transition: box-shadow 0.3s ease; */
-  /* z-index: 1; */
-}
-
 .glow-button:hover {
   /* box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);  */
   box-shadow: 0 0 20px rgba(255, 221, 51, 1); /* More intense yellow glow */

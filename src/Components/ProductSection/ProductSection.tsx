@@ -12,6 +12,7 @@ const ProductCard = ({ image, title }: any) => (
     <img
       src={image}
       alt={title}
+      loading="lazy"
       className="w-full h-40 object-cover rounded-lg mb-4"
     />
     <h3 className="text-lg font-semibold">{title}</h3>
