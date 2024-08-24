@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/navigation"; // Assuming you are using Next.js
 import "./backbutton.css"; // If you have additional custom styles
 
-const BackButton = ({ className = "", children = "Back" }) => {
+const BackButton = ({ className = "", children = "Back", push = "/" }) => {
   const router = useRouter();
 
   const handleClick = () => {

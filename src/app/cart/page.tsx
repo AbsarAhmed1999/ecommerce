@@ -11,6 +11,7 @@ import {
 import CircularIndeterminate from "@/Components/Loading";
 import { useAuthCheck } from "../Auth/useAuthCheck";
 import { Button } from "@mui/material";
+import BackButton from "@/Components/BackButton/BackButton";
 const CartPage = () => {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(selectCartItems);
@@ -38,34 +39,37 @@ const CartPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100 p-4">
-      <h1 className="text-3xl font-bold mb-4">Your Cart</h1>
+    <div className="min-h-screen flex flex-col items-center bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 p-6">
+      <BackButton className="mb-4 absolute top-10 left-10">Go Back</BackButton>
+      <h1 className="text-4xl font-extrabold text-white mb-8">Your Cart</h1>
       {cartItems.length === 0 ? (
-        <p className="text-lg">Your cart is empty</p>
+        <p className="text-xl text-white">Your cart is empty</p>
       ) : (
-        <div className="w-full max-w-4xl bg-white shadow-md rounded-lg p-4">
+        <div className="w-full max-w-4xl bg-white shadow-2xl rounded-lg p-6">
           <ul>
             {cartItems.map((item) => (
               <li
                 key={item.id}
-                className="flex items-center justify-between p-2 border-b"
+                className="flex items-center justify-between p-4 border-b last:border-none"
               >
                 <div className="flex items-center">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="h-16 w-16 rounded-md object-cover"
+                    className="h-20 w-20 rounded-lg object-cover"
                   />
-                  <div className="ml-4">
-                    <h2 className="text-lg font-semibold">{item.name}</h2>
-                    <p className="text-gray-600">{item.price}</p>
-                    <p>Quantity: {item.quantity}</p>
+                  <div className="ml-6">
+                    <h2 className="text-xl font-bold text-gray-800">
+                      {item.name}
+                    </h2>
+                    <p className="text-gray-600">${item.price}</p>
+                    <p className="text-gray-500">Quantity: {item.quantity}</p>
                   </div>
                 </div>
                 <div>
                   <button
                     onClick={() => handleRemoveItem(item.id)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-md"
+                    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition duration-200"
                   >
                     Remove
                   </button>
@@ -73,12 +77,21 @@ const CartPage = () => {
               </li>
             ))}
           </ul>
-          <div>TOTAL AMOUNT : {totalAmount}</div>
+          <div className="text-right mt-6">
+            <p className="text-xl font-semibold text-gray-800">
+              Total Amount:{" "}
+              <span className="text-green-600">${totalAmount.toFixed(2)}</span>
+            </p>
+          </div>
         </div>
       )}
-      {/* <button onClick={clearAllItems}>Clear All Items</button> */}
-      <Button onClick={clearAllItems} variant="contained" size="medium">
-        Clear all Items
+      <Button
+        onClick={clearAllItems}
+        variant="contained"
+        size="medium"
+        className=" bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md transition duration-200 relative top-5"
+      >
+        Clear All Items
       </Button>
     </div>
   );

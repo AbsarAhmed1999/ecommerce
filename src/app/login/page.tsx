@@ -145,7 +145,9 @@ export default function Login() {
       className="min-h-screen flex items-center  "
       style={{ backgroundColor: "#262054 " }}
     >
-      <BackButton className="mb-4 absolute top-10 left-10">Go Back</BackButton>
+      <BackButton className="mb-4 absolute top-10 left-10" push="/">
+        Go Back
+      </BackButton>
       {/* Circles positioned absolutely */}
       <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2 flex flex-col items-center space-y-8">
         {/* Circle with gradient 1 */}

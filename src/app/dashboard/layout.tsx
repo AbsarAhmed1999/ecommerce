@@ -1,17 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "@/app/globals.css";
 import { useSelector } from "react-redux";
-import { selectCartItemsCount } from "@/app/redux/slices/Cart/index"; // adjust this path based on your actual file structure
+import { selectCartItemsCount } from "@/app/redux/slices/Cart/index";
 import SearchBar from "@/Components/SearchBar/SearchBar";
-import ImageAvatars from "@/Components/Avatar";
 import CircularIndeterminate from "@/Components/Loading";
 import Dashboard from "@/app/dashboard/page";
 import data from "@/data/mock-data.json";
 import { useAuthCheck } from "../Auth/useAuthCheck";
-import { useRouter } from "next/navigation";
-import { RootState } from "../redux/store/store";
 import { selectUser } from "../redux/slices/User";
 import Avatar from "@/Components/Avatar";
 import ProfileDropdown from "@/Components/ProfileDropDown";
@@ -25,21 +22,37 @@ interface filteredData {
 }
 
 export default function Layout({ children }: any) {
-  // const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [filteredData, setFilteredData] = useState<filteredData[]>(data);
-  const cartItemCount = useSelector(selectCartItemsCount); // Get the cart item count from Redux store
+  const cartItemCount = useSelector(selectCartItemsCount);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const loading = useAuthCheck();
   const user = useSelector(selectUser);
-  // console.log("USER DEFINED HERE", user);
-  const profileImage = user.profileImage;
+  const profileImage = user?.profileImage;
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const result = data.filter((item) =>
       item.name.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredData(result);
   }, [query]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   if (loading) {
     return (
@@ -54,13 +67,13 @@ export default function Layout({ children }: any) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 via-gray-200 to-gray-300">
       {/* Top Navigation Bar */}
-      <div className="flex justify-between items-center p-6 bg-white shadow-md">
-        <div className="flex-1 flex justify-center">
+      <div className="flex justify-between items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg">
+        <div className="flex items-center space-x-4 w-full max-w-xl">
           <SearchBar setQuery={setQuery} />
         </div>
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-8">
           <Link href="/cart">
             <div className="relative h-10 w-10 cursor-pointer">
               <img
@@ -74,7 +87,7 @@ export default function Layout({ children }: any) {
               )}
             </div>
           </Link>
-          <div className="relative">
+          <div className="relative" ref={dropdownRef}>
             <Avatar
               profileImage={profileImage}
               toggleDropdown={toggleDropdown}
@@ -88,7 +101,7 @@ export default function Layout({ children }: any) {
       </div>
 
       {/* Main Dashboard Content */}
-      <div className="flex-grow p-6 mt-6 w-full max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
+      <div className="flex-grow p-8 mt-8 w-full max-w-5xl mx-auto bg-gradient-to-r from-gray-800 via-gray-900 to-black shadow-2xl rounded-lg">
         <Dashboard filteredData={filteredData} />
       </div>
     </div>
