@@ -43,6 +43,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/app/redux/store/store";
 
+// used to define basic types
 export interface CartItem {
   id: number;
   name: string;
@@ -52,11 +53,13 @@ export interface CartItem {
   quantity: number;
 }
 
+// used to define types
 export interface CartState {
   items: CartItem[];
   totalAmount: number;
 }
 
+// Used to initalize first time
 const initialState: CartState = {
   items: [],
   totalAmount: 0,

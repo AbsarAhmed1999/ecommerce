@@ -238,7 +238,9 @@ export default function Login() {
                   />
                 </div>
                 <button className=" text-white hover:underline focus:outline-none hover:text-blue-700 mt-3">
-                  Forgot password ?
+                  <Link href={"/forgot-password"} legacyBehavior>
+                    <a> Forgot password ?</a>
+                  </Link>
                 </button>
                 <button
                   type="submit"
