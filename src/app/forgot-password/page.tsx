@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
+import Swal from "sweetalert2";
 // import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -14,14 +16,27 @@ const ForgetPassword = () => {
 
     try {
       // Make API request to reset password
-      const response = await fetch("", {
+      const response = await fetch("/api/users/sendOTP", {
         method: "POST",
         body: JSON.stringify({ email }),
       });
+      console.log("response ++", response);
+      if (response.ok) {
+        const result = await response.json();
+        console.log("RESS", result.message);
+        showToastMessage(result.message);
+      }
+
       //   setMessage(response.data.message); // Display success message
     } catch (err) {
       setError("An error occurred. Please try again.");
     }
+  };
+
+  const showToastMessage = (message: string) => {
+    toast.success(message, {
+      position: "top-right",
+    });
   };
 
   return (
@@ -52,6 +67,7 @@ const ForgetPassword = () => {
           Reset Password
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
