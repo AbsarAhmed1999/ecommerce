@@ -4,10 +4,13 @@ import Swal from "sweetalert2";
 // import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +28,9 @@ const ForgetPassword = () => {
         const result = await response.json();
         console.log("RESS", result.message);
         showToastMessage(result.message);
+        setTimeout(() => {
+          router.push("/otp-verification");
+        }, 3000);
       }
 
       //   setMessage(response.data.message); // Display success message
