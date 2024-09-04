@@ -1,9 +1,18 @@
 import crypto from "crypto";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import User from "@/model/User";
 export async function otpUserService(email: string) {
   //check does this email already exist in database ?
-  // const checkEmail =
+  console.log("EMAIL inside otpUserService", email);
+  const isEmailExist = await User.find({ email });
+  console.log("isEMailExistr", isEmailExist);
+  if (!isEmailExist) {
+    return NextResponse.json(
+      { message: "Email not found , please Register" },
+      { status: 300 }
+    );
+  }
 
   let otpStore: { [key: string]: string } = {};
   const otp = crypto.randomInt(100000, 999999).toString();
@@ -11,7 +20,7 @@ export async function otpUserService(email: string) {
   const sender = nodemailer.createTransport({
     service: "GMAIL",
     auth: {
-      user: "absar8857@gmail.com",
+      user: `${process.env.USER}`,
       pass: `${process.env.GMAIL_AUTH}`,
     },
   });
