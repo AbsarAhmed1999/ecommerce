@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, selectUser } from "@/app/redux/slices/User";
 import Avatar from "@/Components/Avatar"; // Adjust the path according to your project structure
+import BackButton from "@/Components/BackButton/BackButton";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center py-10">
+      <BackButton>Go Back</BackButton>
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
         <div className="text-center mb-6">
           <div className="relative">

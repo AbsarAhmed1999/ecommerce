@@ -2,11 +2,25 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function OTPVerification() {
+type OTPVerificationParams = {
+  email: string;
+};
+
+type result = {
+  data: { decodeEmail: string };
+  message: string;
+  success: boolean;
+};
+export default function OTPVerification({
+  params,
+}: {
+  params: OTPVerificationParams;
+}) {
   const [otp, setOtp] = useState("");
   const router = useRouter();
+  const email = params.email;
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log("INSIDEHANDLE SUBMIT +");
 
@@ -15,15 +29,16 @@ export default function OTPVerification() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ otp }),
+      body: JSON.stringify({ email, otp }),
     });
 
-    const result = await response.json();
+    const result: result = await response.json();
+    const decodedEmail = result.data.decodeEmail;
+    console.log("RESULT inside otp-verification", decodedEmail);
 
     if (result.success) {
-      // OTP is correct, redirect to a secure page or show success message
-      alert("OTP verified successfully!");
-      router.push("/dashboard"); // Replace with your desired route
+      const encodeEmail = encodeURIComponent(decodedEmail);
+      router.push(`/new-password-form/${encodeEmail}`); // Replace with your desired route
     } else {
       alert("Invalid OTP, please try again.");
     }

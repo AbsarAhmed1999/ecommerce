@@ -50,12 +50,12 @@ const RegistrationForm = () => {
         body: JSON.stringify(values),
       });
       console.log("RESULT HAI YEH", result);
-      console.log("RESULT KI BODY", result.body);
       if (!result.ok) {
-        console.error("Registration failed");
+        const response = await result.json();
+        console.log("Absar response", response);
         Swal.fire({
-          title: "Registration Failed!",
-          text: "Please try again.",
+          title: response.title,
+          text: response.text,
           icon: "error",
         });
       } else {

@@ -28,8 +28,9 @@ const ForgetPassword = () => {
         const result = await response.json();
         console.log("RESS", result.message);
         showToastMessage(result.message);
+        const encodedEmail = encodeURIComponent(email); // Encode the email
         setTimeout(() => {
-          router.push("/otp-verification");
+          router.push(`/otp-verification/${encodedEmail}`);
         }, 3000);
       }
 

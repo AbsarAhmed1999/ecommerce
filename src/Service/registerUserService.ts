@@ -19,10 +19,13 @@ export async function registerUserService(userInput: UserInput) {
 
   // Check if user already exists by email
   const userExist = await User.findOne({ email: email });
-
+  console.log("USER EXIST karta hai ++++", userExist);
   if (userExist) {
     return NextResponse.json(
-      { error: "User already exists with this email" },
+      {
+        title: "User already exists with this email",
+        text: "Go to Sign In Page",
+      },
       { status: 409 }
     );
   }
@@ -45,7 +48,12 @@ export async function registerUserService(userInput: UserInput) {
     });
     newUser.accessToken = token;
     await newUser.save();
-    return { user: newUser, token };
+    return NextResponse.json({
+      title: "Registration successfull",
+      text: "Sign In",
+      user: newUser,
+      token,
+    });
   } catch (error) {
     const e = error as Error;
     if ((e as any).code === 11000) {

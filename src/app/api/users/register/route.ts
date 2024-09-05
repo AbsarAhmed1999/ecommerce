@@ -7,8 +7,7 @@ export async function POST(req: NextRequest) {
     // Ensure the database connection is established
     const body = await req.json(); // Parse the request body
     const newUser = await registerUserService(body); // Register the new user
-    console.log("THIS IS NEW USER", newUser);
-    return NextResponse.json({ data: newUser }, { status: 200 });
+    return newUser;
   } catch (error) {
     console.error("Error in API route:", error); // Log the error for debugging
     if (error instanceof Error) {
