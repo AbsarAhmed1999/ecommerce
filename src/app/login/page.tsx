@@ -25,11 +25,10 @@ interface LoginValues {
 export default function Login() {
   const [initialLoading, setInitialLoading] = useState(true);
   const [redirecting, setRedirecting] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+
   const router = useRouter();
   const dispatch = useDispatch();
+
   useEffect(() => {
     (async () => {
       try {
@@ -113,7 +112,7 @@ export default function Login() {
       });
 
       const result = await response.json();
-      console.log("YEH MERA RESULT0", result);
+      console.log("result", result);
       if (response.ok) {
         showLoginSuccessAlert();
         dispatch(setUser(result.user));

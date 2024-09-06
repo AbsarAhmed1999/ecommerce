@@ -27,8 +27,9 @@ export async function profileUserService(
           profileImage: profileImage,
         }
       );
-
-      return NextResponse.json({ user: updateProfile }, { status: 200 });
+      console.log("updatedPROFILE aha++", updateProfile);
+      return { user: updateProfile };
+      // return NextResponse.json({ user: updateProfile }, { status: 200 });
     } else {
       const hashPassword = await bcrypt.hash(password, 10);
       const updateProfile = await User.findOneAndUpdate(

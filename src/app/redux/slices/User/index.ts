@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/app/redux/store/store";
 import mongoose from "mongoose";
 interface UserState {
-  id: mongoose.ObjectId | null;
+  id: string | null;
   fullName: string | null;
   profileImage: string | null;
   email: string | null;

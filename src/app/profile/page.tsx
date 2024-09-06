@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser, selectUser } from "@/app/redux/slices/User";
 import Avatar from "@/Components/Avatar"; // Adjust the path according to your project structure
 import BackButton from "@/Components/BackButton/BackButton";
+import { useRouter } from "next/navigation";
 
 export default function Profile() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-
+  console.log("USER FROM STORE", user);
   const [fullName, setFullName] = useState(user?.fullName || "");
+  const router = useRouter();
   const [name, setName] = useState(fullName);
   const [email, setEmail] = useState(user?.email || "");
   const [profileImage, setProfileImage] = useState<string | null>(
@@ -18,19 +20,17 @@ export default function Profile() {
   );
   const [password, setPassword] = useState("");
   const [id, setId] = useState(user?.id);
-
   useEffect(() => {
-    let id = user?.id;
-  }, []);
+    if (user && user.id) {
+      setId(user.id);
+    }
+  }, [user]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("TARGETED", e.target.files);
-    console.log("TARGETED FILES", e.target.files?.[0]);
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        console.log("READER", reader.result as string);
         setProfileImage(reader.result as string);
       };
       reader.readAsDataURL(file);
@@ -38,6 +38,7 @@ export default function Profile() {
   };
 
   const handleSaveChanges = async () => {
+    setId(user?.id);
     try {
       const response = await fetch("/api/users/updateProfile", {
         method: "PUT",
@@ -50,11 +51,14 @@ export default function Profile() {
           password: password,
         }),
       });
-      const result = await response.json();
-      console.log("UpdateDProfiel is here", result.user);
+
       if (response.ok) {
+        const result = await response.json();
+        console.log("Updated User:", result.user);
         dispatch(setUser(result?.user));
+        console.log("user.profileImage", user.profileImage);
         alert("Profile updated successfully!");
+        router.push("/dashboard");
       } else {
         alert("Failed to update profile");
       }
@@ -62,8 +66,6 @@ export default function Profile() {
       console.log("ERROR ");
       alert("An erorr while updating profile");
     }
-
-    alert("Profile updated successfully!");
   };
 
   return (

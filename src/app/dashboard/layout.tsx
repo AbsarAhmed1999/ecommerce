@@ -23,12 +23,13 @@ interface filteredData {
 
 export default function Layout({ children }: any) {
   const [query, setQuery] = useState("");
+  const user = useSelector(selectUser);
+
   const [filteredData, setFilteredData] = useState<filteredData[]>(data);
   const cartItemCount = useSelector(selectCartItemsCount);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const loading = useAuthCheck();
-  const user = useSelector(selectUser);
-  const profileImage = user?.profileImage;
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -37,6 +38,11 @@ export default function Layout({ children }: any) {
     );
     setFilteredData(result);
   }, [query]);
+
+  useEffect(() => {
+    // Optional: force re-render if needed
+    // console.log("User updated:", user);
+  }, [user]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -89,7 +95,7 @@ export default function Layout({ children }: any) {
           </Link>
           <div className="relative" ref={dropdownRef}>
             <Avatar
-              profileImage={profileImage}
+              profileImage={user?.profileImage}
               toggleDropdown={toggleDropdown}
             />
             <ProfileDropdown

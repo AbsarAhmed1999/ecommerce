@@ -5,7 +5,7 @@ export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
     const response = await profileUserService(body);
-    return response;
+    return NextResponse.json(response, { status: 200 });
   } catch (error) {
     console.error("Error in API route:", error); // Log the error for debugging
     if (error instanceof Error) {
