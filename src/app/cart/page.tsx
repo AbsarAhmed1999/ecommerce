@@ -1,26 +1,28 @@
 // Components/CartPage.tsx
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
 import {
   selectCartItems,
   removeItem,
   clearCart,
-} from "@/app/redux/slices/Cart"; // adjust this path based on your actual file structure
+} from "@/app/redux/slices/Cart";
 import CircularIndeterminate from "@/Components/Loading";
 import { useAuthCheck } from "../Auth/useAuthCheck";
 import { Button } from "@mui/material";
 import BackButton from "@/Components/BackButton/BackButton";
+import { useRouter } from "next/navigation";
+
 const CartPage = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const cartItems = useAppSelector(selectCartItems);
-  // const [loading, setLoading] = useState(true);
+  const loading = useAuthCheck();
 
   const handleRemoveItem = (id: number) => {
     dispatch(removeItem({ id }));
   };
-  const loading = useAuthCheck();
 
   const totalAmount = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;
@@ -28,6 +30,14 @@ const CartPage = () => {
 
   const clearAllItems = () => {
     dispatch(clearCart());
+  };
+
+  const handleContinueShopping = () => {
+    router.push("/products"); // Adjust the path to your product listing page
+  };
+
+  const handleCheckout = () => {
+    router.push("/checkout"); // Adjust the path to your checkout page
   };
 
   if (loading) {
@@ -43,7 +53,17 @@ const CartPage = () => {
       <BackButton className="mb-4 absolute top-10 left-10">Go Back</BackButton>
       <h1 className="text-4xl font-extrabold text-white mb-8">Your Cart</h1>
       {cartItems.length === 0 ? (
-        <p className="text-xl text-white">Your cart is empty</p>
+        <div className="text-center">
+          <p className="text-xl text-white mb-4">Your cart is empty</p>
+          <Button
+            onClick={handleContinueShopping}
+            variant="contained"
+            size="large"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
+          >
+            Continue Shopping
+          </Button>
+        </div>
       ) : (
         <div className="w-full max-w-4xl bg-white shadow-2xl rounded-lg p-6">
           <ul>
@@ -83,16 +103,26 @@ const CartPage = () => {
               <span className="text-green-600">${totalAmount.toFixed(2)}</span>
             </p>
           </div>
+          <div className="flex justify-between mt-6">
+            <Button
+              onClick={clearAllItems}
+              variant="contained"
+              size="medium"
+              className="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
+            >
+              Clear All Items
+            </Button>
+            <Button
+              onClick={handleCheckout}
+              variant="contained"
+              size="medium"
+              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
+            >
+              Proceed to Checkout
+            </Button>
+          </div>
         </div>
       )}
-      <Button
-        onClick={clearAllItems}
-        variant="contained"
-        size="medium"
-        className=" bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md transition duration-200 relative top-5"
-      >
-        Clear All Items
-      </Button>
     </div>
   );
 };

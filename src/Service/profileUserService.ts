@@ -29,9 +29,19 @@ export async function profileUserService(
         },
         { new: true, select: "-password" }
       );
+      if (!updateProfile) {
+        return NextResponse.json({ error: "User not found" }, { status: 404 });
+      }
+      // Customize the response to replace _id with id
+      // const responseObject = {
+      //   id: updateProfile._id, // Map _id to id
+      //   fullName: updateProfile.fullName,
+      //   email: updateProfile.email,
+      //   profileImage: updateProfile.profileImage,
+      //   userType: updateProfile.userType,
+      // };
 
       // console.log("result", result);
-      console.log("updatedPROFILE ++++++", updateProfile);
       // return { user: updateProfile };
       return NextResponse.json({ user: updateProfile }, { status: 200 });
     } else {
