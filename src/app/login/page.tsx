@@ -112,10 +112,11 @@ export default function Login() {
       });
 
       const result = await response.json();
-      console.log("result", result);
+      console.log("After login Am I getting ID? ", result);
       if (response.ok) {
         showLoginSuccessAlert();
-        dispatch(setUser(result.user));
+        console.log("RESULT > ", result);
+        dispatch(setUser(result));
       } else {
         console.log("Login failed");
         showLoginFailureAlert();

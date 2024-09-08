@@ -21,10 +21,10 @@ interface filteredData {
   id: number;
 }
 
-export default function Layout({ children }: any) {
+export default function Layout() {
   const [query, setQuery] = useState("");
   const user = useSelector(selectUser);
-
+  console.log("INSIDE DAHSBORD LAYOUT USER from STORE", user);
   const [filteredData, setFilteredData] = useState<filteredData[]>(data);
   const cartItemCount = useSelector(selectCartItemsCount);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -37,12 +37,7 @@ export default function Layout({ children }: any) {
       item.name.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredData(result);
-  }, [query]);
-
-  useEffect(() => {
-    // Optional: force re-render if needed
-    // console.log("User updated:", user);
-  }, [user]);
+  }, [query, data]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -95,7 +90,7 @@ export default function Layout({ children }: any) {
           </Link>
           <div className="relative" ref={dropdownRef}>
             <Avatar
-              profileImage={user?.profileImage}
+              profileImage={user?.profileImage || "/default-avatar.png"}
               toggleDropdown={toggleDropdown}
             />
             <ProfileDropdown

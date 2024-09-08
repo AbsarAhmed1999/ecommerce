@@ -31,12 +31,11 @@ export async function loginUserService(userLoginCredentials: login) {
     // const response = NextResponse.json({ userExist }, { status: 201 });
     const response = NextResponse.json(
       {
-        user: {
-          id: userExist._id,
-          fullName: userExist.fullName,
-          email: userExist.email,
-          profileImage: userExist.profileImage,
-        },
+        _id: userExist._id,
+        fullName: userExist.fullName,
+        email: userExist.email,
+        profileImage: userExist.profileImage,
+        userType: userExist.userType,
       },
       { status: 200 }
     );

@@ -3,17 +3,19 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/app/redux/store/store";
 import mongoose from "mongoose";
 interface UserState {
-  id: string | null;
+  _id: string | null;
   fullName: string | null;
   profileImage: string | null;
   email: string | null;
+  userType: string | null;
 }
 
 const initialState: UserState = {
-  id: null,
+  _id: null,
   fullName: null,
   profileImage: null,
   email: null,
+  userType: null,
 };
 
 export const UserSlice = createSlice({
@@ -24,7 +26,8 @@ export const UserSlice = createSlice({
       state.fullName = action.payload.fullName;
       state.profileImage = action.payload.profileImage;
       state.email = action.payload.email;
-      state.id = action.payload.id;
+      state._id = action.payload._id;
+      state.userType = action.payload.userType;
     },
     // clearUser: (state) => {
     //   state.user = null;

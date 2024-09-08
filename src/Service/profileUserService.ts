@@ -18,18 +18,22 @@ export async function profileUserService(
   console.log("ID here???", id);
   // hashPasswordFirst
   try {
-    if (!password) {
+    if (password === "") {
+      console.log("PASSWORD IS EMPTY");
       const updateProfile = await User.findOneAndUpdate(
         { _id: id },
         {
           fullName: fullName,
           email: email,
           profileImage: profileImage,
-        }
+        },
+        { new: true, select: "-password" }
       );
-      console.log("updatedPROFILE aha++", updateProfile);
-      return { user: updateProfile };
-      // return NextResponse.json({ user: updateProfile }, { status: 200 });
+
+      // console.log("result", result);
+      console.log("updatedPROFILE ++++++", updateProfile);
+      // return { user: updateProfile };
+      return NextResponse.json({ user: updateProfile }, { status: 200 });
     } else {
       const hashPassword = await bcrypt.hash(password, 10);
       const updateProfile = await User.findOneAndUpdate(
@@ -41,6 +45,7 @@ export async function profileUserService(
           password: hashPassword,
         }
       );
+      console.log("updateProfile inside profileUserService", updateProfile);
 
       return NextResponse.json({ user: updateProfile }, { status: 200 });
     }

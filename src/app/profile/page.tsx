@@ -10,21 +10,23 @@ import { useRouter } from "next/navigation";
 export default function Profile() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  console.log("USER FROM STORE", user);
+  console.log("USER FROM STORE", user._id);
   const [fullName, setFullName] = useState(user?.fullName || "");
   const router = useRouter();
-  const [name, setName] = useState(fullName);
+  // const [name, setName] = useState(fullName);
   const [email, setEmail] = useState(user?.email || "");
   const [profileImage, setProfileImage] = useState<string | null>(
     user?.profileImage || ""
   );
   const [password, setPassword] = useState("");
-  const [id, setId] = useState(user?.id);
+  const [id, setId] = useState(user?._id);
+  console.log("ID IS HERE", id);
   useEffect(() => {
-    if (user && user.id) {
-      setId(user.id);
+    console.log("INSIDE USE EFFECT");
+    if (user && user._id) {
+      setId(user._id);
     }
-  }, [user]);
+  }, [[user]]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -38,25 +40,28 @@ export default function Profile() {
   };
 
   const handleSaveChanges = async () => {
-    setId(user?.id);
+    console.log("INSIDE HANDLE SAVE CHANGES");
     try {
       const response = await fetch("/api/users/updateProfile", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: id,
-          fullName: name,
+          fullName: fullName,
           email: email,
           profileImage: profileImage,
           password: password,
         }),
       });
-
+      const result = await response.json();
+      console.log("RESULT inside profilePage", result);
+      console.log("response.ok", response.ok);
       if (response.ok) {
-        const result = await response.json();
+        // const result = await response.json(); // causing errors
         console.log("Updated User:", result.user);
+        // problem is here
+        // I get result inside result I am having id as _id
         dispatch(setUser(result?.user));
-        console.log("user.profileImage", user.profileImage);
         alert("Profile updated successfully!");
         router.push("/dashboard");
       } else {
@@ -98,8 +103,8 @@ export default function Profile() {
             <input
               type="text"
               className="border border-gray-300 rounded-lg px-4 py-2 w-2/3"
-              value={name || ""}
-              onChange={(e) => setName(e.target.value)}
+              value={fullName || ""}
+              onChange={(e) => setFullName(e.target.value)}
             />
           </div>
           <div className="flex items-center justify-between">
@@ -124,7 +129,10 @@ export default function Profile() {
           <div className="text-center">
             <button
               className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700"
-              onClick={handleSaveChanges}
+              onClick={() => {
+                console.log("BUTTON CLICKED");
+                handleSaveChanges();
+              }}
             >
               Save Changes
             </button>
