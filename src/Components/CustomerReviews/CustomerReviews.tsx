@@ -22,7 +22,7 @@ const reviews = [
     avatar: "avatar3.jpg",
   },
   {
-    id: 2,
+    id: 3,
     name: "Jane Smith",
     role: "Marketing Director",
     review:

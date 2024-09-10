@@ -5,10 +5,10 @@ import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import "@/app/globals.css";
-import Navbar from "@/Components/Navbar/navbar";
 import CircularIndeterminate from "@/Components/Loading";
 import Link from "next/link";
 import BackButton from "@/Components/BackButton/BackButton";
+import { useGoogleLogin } from "@react-oauth/google";
 // import Navbar from "@/Components/Navbar/navbar";
 // Define Yup schema for validation
 const validationSchema = Yup.object().shape({
@@ -94,6 +94,29 @@ const RegistrationForm = () => {
     );
   }
 
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      // You can now use the access token or ID token for backend validation or user login
+      console.log("Google token response", tokenResponse);
+      // const result = fetch("/api/protected", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   credentials: "include",
+      //   body: JSON.stringify({ token: tokenResponse.access_token }),
+      // });
+      // console.log("RESULT INSIDE GOOGLE TOKEN RESPOSNE", result);
+
+      // Save the token if needed
+      localStorage.setItem("googleToken", tokenResponse.access_token);
+
+      // Redirect the user after successful login
+      router.push("/dashboard"); // Or any other route
+    },
+    onError: (errorResponse) => {
+      console.error("Google login error", errorResponse);
+    },
+  });
+
   return (
     <div
       className="min-h-screen flex items-center justify-center"
@@ -170,7 +193,7 @@ const RegistrationForm = () => {
 
           <div className="mt-1 text-center">
             <button
-              // onClick={handleRegister}
+              onClick={handleGoogleLogin}
               className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-200"
             >
               Continue with Google

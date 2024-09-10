@@ -28,7 +28,7 @@ export default function Layout() {
   const [filteredData, setFilteredData] = useState<filteredData[]>(data);
   const cartItemCount = useSelector(selectCartItemsCount);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const loading = useAuthCheck();
+  const { loading, authenticated } = useAuthCheck();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -68,43 +68,45 @@ export default function Layout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 via-gray-200 to-gray-300">
-      {/* Top Navigation Bar */}
-      <div className="flex justify-between items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg">
-        <div className="flex items-center space-x-4 w-full max-w-xl">
-          <SearchBar setQuery={setQuery} />
-        </div>
-        <div className="flex items-center space-x-8">
-          <Link href="/cart">
-            <div className="relative h-10 w-10 cursor-pointer">
-              <img
-                src="/trolley.png"
-                className="w-full h-full object-contain"
+    authenticated && (
+      <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 via-gray-200 to-gray-300">
+        {/* Top Navigation Bar */}
+        <div className="flex justify-between items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg">
+          <div className="flex items-center space-x-4 w-full max-w-xl">
+            <SearchBar setQuery={setQuery} />
+          </div>
+          <div className="flex items-center space-x-8">
+            <Link href="/cart">
+              <div className="relative h-10 w-10 cursor-pointer">
+                <img
+                  src="/trolley.png"
+                  className="w-full h-full object-contain"
+                />
+                {cartItemCount > 0 && (
+                  <div className="absolute top-0 right-0 h-5 w-5 bg-red-600 text-white text-xs flex items-center justify-center rounded-full">
+                    {cartItemCount}
+                  </div>
+                )}
+              </div>
+            </Link>
+            <div className="relative" ref={dropdownRef}>
+              <Avatar
+                profileImage={user?.profileImage || "/default-avatar.png"}
+                toggleDropdown={toggleDropdown}
               />
-              {cartItemCount > 0 && (
-                <div className="absolute top-0 right-0 h-5 w-5 bg-red-600 text-white text-xs flex items-center justify-center rounded-full">
-                  {cartItemCount}
-                </div>
-              )}
+              <ProfileDropdown
+                isOpen={isDropdownOpen}
+                toggleDropdown={toggleDropdown}
+              />
             </div>
-          </Link>
-          <div className="relative" ref={dropdownRef}>
-            <Avatar
-              profileImage={user?.profileImage || "/default-avatar.png"}
-              toggleDropdown={toggleDropdown}
-            />
-            <ProfileDropdown
-              isOpen={isDropdownOpen}
-              toggleDropdown={toggleDropdown}
-            />
           </div>
         </div>
-      </div>
 
-      {/* Main Dashboard Content */}
-      <div className="flex-grow p-8 mt-8 w-full max-w-5xl mx-auto bg-gradient-to-r from-gray-800 via-gray-900 to-black shadow-2xl rounded-lg">
-        <Dashboard filteredData={filteredData} />
+        {/* Main Dashboard Content */}
+        <div className="flex-grow p-8 mt-8 w-full max-w-5xl mx-auto bg-gradient-to-r from-gray-800 via-gray-900 to-black shadow-2xl rounded-lg">
+          <Dashboard filteredData={filteredData} />
+        </div>
       </div>
-    </div>
+    )
   );
 }

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import "@/app/globals.css";
-import Navbar from "@/Components/Navbar/navbar";
 import { useRouter } from "next/navigation";
 import { JwtAuthService } from "../utils/jwt-service";
 import CircularIndeterminate from "@/Components/Loading";
@@ -13,6 +12,7 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import Swal from "sweetalert2";
 import "./login.css";
 import BackButton from "@/Components/BackButton/BackButton";
+import { useAuthCheck } from "../Auth/useAuthCheck";
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
@@ -25,31 +25,31 @@ interface LoginValues {
 export default function Login() {
   const [initialLoading, setInitialLoading] = useState(true);
   const [redirecting, setRedirecting] = useState(false);
-
   const router = useRouter();
   const dispatch = useDispatch();
+  const { loading, authenticated } = useAuthCheck(false); // No redirect if token is missing
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch("/api/check-token", {
-          credentials: "include",
-        });
-        console.log("RESPONSE", response.ok);
-        if (response.ok) {
-          setRedirecting(true);
-          setTimeout(() => {
-            router.push("/dashboard");
-          }, 500); // Short delay to show loader
-        } else {
-          setInitialLoading(false);
-        }
-      } catch (error) {
-        console.error("An error occurred:", error);
-        router.push("/login");
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const response = await fetch("/api/check-token", {
+  //         credentials: "include",
+  //       });
+  //       console.log("RESPONSE", response.ok);
+  //       if (response.ok) {
+  //         setRedirecting(true);
+  //         setTimeout(() => {
+  //           router.push("/dashboard");
+  //         }, 500); // Short delay to show loader
+  //       } else {
+  //         setInitialLoading(false);
+  //       }
+  //     } catch (error) {
+  //       console.error("An error occurred:", error);
+  //       router.push("/login");
+  //     }
+  //   })();
+  // }, []);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid Email").required("Email is required"),
@@ -132,12 +132,23 @@ export default function Login() {
     password: "",
   };
 
-  if (initialLoading || redirecting) {
+  // if (initialLoading || redirecting) {
+  //   return (
+  //     <div className="flex justify-center items-center min-h-screen bg-gray-100">
+  //       <CircularIndeterminate />
+  //     </div>
+  //   );
+  // }
+  if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <CircularIndeterminate />
       </div>
     );
+  }
+  if (authenticated) {
+    router.push("/dashboard");
+    return null;
   }
 
   return (

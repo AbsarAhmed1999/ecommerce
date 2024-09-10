@@ -1,26 +1,31 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export function useAuthCheck() {
+export const useAuthCheck = (redirectOnFail: boolean = true) => {
   const [loading, setLoading] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    (async () => {
+    const checkToken = async () => {
       try {
-        const response = await fetch("/api/protected", {
+        const response = await fetch("/api/check-token", {
           credentials: "include",
         });
-        if (!response.ok) {
+        if (response.ok) {
+          setAuthenticated(true);
+        } else if (redirectOnFail) {
           router.push("/login");
-        } else {
-          setLoading(false);
         }
       } catch (error) {
         console.error("An error occurred:", error);
-        router.push("/login");
+        if (redirectOnFail) router.push("/login");
+      } finally {
+        setLoading(false);
       }
-    })();
-  }, [router]);
-  return loading;
-}
+    };
+    checkToken();
+  }, [router, redirectOnFail]);
+
+  return { loading, authenticated };
+};
