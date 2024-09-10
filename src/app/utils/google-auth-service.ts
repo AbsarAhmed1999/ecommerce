@@ -5,6 +5,7 @@ const CLIENT_ID = process.env.GOOGLE_CLIENT_ID; // Your Google Client ID
 const client = new OAuth2Client(CLIENT_ID);
 
 export async function verifyGoogleToken(token: string) {
+  console.log("INSDIE VERIFYING GOOGLE TOKEN", token);
   try {
     // Verify the token using Google's OAuth2Client
     const ticket = await client.verifyIdToken({
@@ -14,6 +15,8 @@ export async function verifyGoogleToken(token: string) {
 
     // Get the payload containing the user information
     const payload = ticket.getPayload();
+
+    console.log("PAYLOAD ", payload);
 
     if (!payload) {
       throw new Error("Invalid Google token");

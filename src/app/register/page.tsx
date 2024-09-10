@@ -95,22 +95,33 @@ const RegistrationForm = () => {
   }
 
   const handleGoogleLogin = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
+    onSuccess: async (tokenResponse) => {
+      const accessToken = tokenResponse.access_token;
       // You can now use the access token or ID token for backend validation or user login
       console.log("Google token response", tokenResponse);
-      // const result = fetch("/api/protected", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   credentials: "include",
-      //   body: JSON.stringify({ token: tokenResponse.access_token }),
-      // });
-      // console.log("RESULT INSIDE GOOGLE TOKEN RESPOSNE", result);
+      // Fetch user info from Google
+      const userInfoResponse = await fetch(
+        `https://www.googleapis.com/oauth2/v2/userinfo?access_token=${accessToken}`
+      );
+      console.log(
+        "AFTER I HIT GOOGLE API WITH ACCES TOKEN I GET userInfoResponse",
+        userInfoResponse
+      );
+      const userInfo = await userInfoResponse.json();
+      const response = await fetch("/api/protected", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ userInfo }),
+      });
 
-      // Save the token if needed
-      localStorage.setItem("googleToken", tokenResponse.access_token);
-
-      // Redirect the user after successful login
-      router.push("/dashboard"); // Or any other route
+      const data = await response.json();
+      console.log("Data inside regsiter", data);
+      if (data.success) {
+        // Save your own JWT or handle authentication state
+        localStorage.setItem("token", data.token);
+        router.push("/dashboard");
+      }
     },
     onError: (errorResponse) => {
       console.error("Google login error", errorResponse);
