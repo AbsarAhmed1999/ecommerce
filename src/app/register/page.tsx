@@ -128,6 +128,11 @@ const RegistrationForm = () => {
     },
   });
 
+  // Event handler for the button click
+  const handleClick = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior if needed
+    handleGoogleLogin(); // Call the login function
+  };
   return (
     <div
       className="min-h-screen flex items-center justify-center"
@@ -204,7 +209,7 @@ const RegistrationForm = () => {
 
           <div className="mt-1 text-center">
             <button
-              onClick={handleGoogleLogin}
+              onClick={handleClick}
               className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-200"
             >
               Continue with Google

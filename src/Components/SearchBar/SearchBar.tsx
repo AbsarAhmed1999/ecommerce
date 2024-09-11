@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import data from "@/data/mock-data.json";
-import { Product } from "@/app/dashboard/page";
+import { Product } from "@/Components/Dashboard/Dashboard";
 
 export default function SearchBar({
   setQuery,

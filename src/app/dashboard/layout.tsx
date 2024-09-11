@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { selectCartItemsCount } from "@/app/redux/slices/Cart/index";
 import SearchBar from "@/Components/SearchBar/SearchBar";
 import CircularIndeterminate from "@/Components/Loading";
-import Dashboard from "@/app/dashboard/page";
+import Dashboard from "@/Components/Dashboard/Dashboard";
 import data from "@/data/mock-data.json";
 import { useAuthCheck } from "../Auth/useAuthCheck";
 import { selectUser } from "../redux/slices/User";

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { JwtAuthService } from "@/app/utils/jwt-service";
-import { verifyGoogleToken } from "@/app/utils/google-auth-service";
 import { registerUserServiceThroughGoogle } from "@/Service/googleUserService";
 
 export async function POST(req: NextRequest) {

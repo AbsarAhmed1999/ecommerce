@@ -2,12 +2,19 @@
 import React, { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 
+interface ParamsType {
+  email: string;
+}
+
 export default function NewPasswordForm() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
   const params = useParams(); // Use this to get the email from the URL
-  const email = decodeURIComponent(params.email); // Decode it if necessary
+
+  // Handle params.email being either a string or an array of strings
+  const email = Array.isArray(params.email) ? params.email[0] : params.email;
+  const decodedEmail = email ? decodeURIComponent(email) : "";
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
