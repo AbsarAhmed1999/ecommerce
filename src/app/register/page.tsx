@@ -9,6 +9,8 @@ import CircularIndeterminate from "@/Components/Loading";
 import Link from "next/link";
 import BackButton from "@/Components/BackButton/BackButton";
 import { useGoogleLogin } from "@react-oauth/google";
+import { setUser } from "../redux/slices/User";
+import { useDispatch } from "react-redux";
 // import Navbar from "@/Components/Navbar/navbar";
 // Define Yup schema for validation
 const validationSchema = Yup.object().shape({
@@ -35,7 +37,7 @@ const RegistrationForm = () => {
     email: "",
     password: "",
   };
-
+  const dispatch = useDispatch();
   const handleSubmit = async (
     values: Values,
     { setSubmitting }: FormikHelpers<Values>
@@ -103,23 +105,21 @@ const RegistrationForm = () => {
       const userInfoResponse = await fetch(
         `https://www.googleapis.com/oauth2/v2/userinfo?access_token=${accessToken}`
       );
-      console.log(
-        "AFTER I HIT GOOGLE API WITH ACCES TOKEN I GET userInfoResponse",
-        userInfoResponse
-      );
+
       const userInfo = await userInfoResponse.json();
+      console.log("THIS IS USER INFORMATION", userInfo);
       const response = await fetch("/api/protected", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({ userInfo }),
       });
-
-      const data = await response.json();
-      console.log("Data inside regsiter", data);
-      if (data.success) {
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        dispatch(setUser(data.user));
         // Save your own JWT or handle authentication state
-        localStorage.setItem("token", data.token);
+        // localStorage.setItem("token", data.token);
         router.push("/dashboard");
       }
     },
@@ -223,3 +223,6 @@ const RegistrationForm = () => {
 };
 
 export default RegistrationForm;
+function dispatch(arg0: any) {
+  throw new Error("Function not implemented.");
+}

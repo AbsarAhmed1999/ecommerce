@@ -52,12 +52,27 @@ export async function registerUserServiceThroughGoogle(
     // Update accessToken
     user.accessToken = token;
     await user.save();
-
-    return NextResponse.json({
-      title: "Login success",
-      user,
-      token,
+    const createNewObjectOfUser = {
+      email: user.email,
+      fullName: user.fullName,
+      _id: user._id,
+      profileImage: user.profileImage,
+      userType: user.userType,
+    };
+    const response = NextResponse.json(
+      {
+        title: "Registration Successfull",
+        user: createNewObjectOfUser,
+      },
+      { status: 200 }
+    );
+    response.cookies.set("token", token, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 60 * 60,
+      path: "/",
     });
+    return response;
   }
 
   // If user doesn't exist, create a new one
@@ -80,11 +95,28 @@ export async function registerUserServiceThroughGoogle(
     newUser.accessToken = token;
     await newUser.save();
 
-    return NextResponse.json({
-      title: "Registration successful",
-      user: newUser,
-      token,
+    const createNewObjectOfnewUser = {
+      email: newUser.email,
+      fullName: newUser.fullName,
+      _id: newUser._id,
+      profileImage: newUser.profileImage,
+      userType: newUser.userType,
+    };
+
+    const response = NextResponse.json(
+      {
+        title: "Registration successful",
+        user: createNewObjectOfnewUser,
+      },
+      { status: 200 }
+    );
+    response.cookies.set("token", token, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 60 * 60,
+      path: "/",
     });
+    return response;
   } catch (error) {
     throw new Error("Failed to register new Google User");
   }

@@ -29,28 +29,6 @@ export default function Login() {
   const dispatch = useDispatch();
   const { loading, authenticated } = useAuthCheck(false); // No redirect if token is missing
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const response = await fetch("/api/check-token", {
-  //         credentials: "include",
-  //       });
-  //       console.log("RESPONSE", response.ok);
-  //       if (response.ok) {
-  //         setRedirecting(true);
-  //         setTimeout(() => {
-  //           router.push("/dashboard");
-  //         }, 500); // Short delay to show loader
-  //       } else {
-  //         setInitialLoading(false);
-  //       }
-  //     } catch (error) {
-  //       console.error("An error occurred:", error);
-  //       router.push("/login");
-  //     }
-  //   })();
-  // }, []);
-
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid Email").required("Email is required"),
     password: Yup.string().required("Password is required"),
@@ -132,13 +110,6 @@ export default function Login() {
     password: "",
   };
 
-  // if (initialLoading || redirecting) {
-  //   return (
-  //     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-  //       <CircularIndeterminate />
-  //     </div>
-  //   );
-  // }
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -191,13 +162,7 @@ export default function Login() {
         <div
           className="absolute left-28 bottom-[-60px] w-40 h-40 rounded-full flex items-center justify-center"
           style={{
-            // background: "linear-gradient(135deg, #000000, #434343)", // Gradient from black to gray
             background: "linear-gradient(135deg, #7F00FF, #E100FF)",
-            //   boxShadow: `
-            //   0 0 15px rgba(255, 255, 255, 0.6),
-            //   0 0 30px rgba(255, 255, 255, 0.4),
-            //   0 0 60px rgba(255, 255, 255, 0.2)
-            // `,
           }}
         ></div>
       </div>
