@@ -8,7 +8,7 @@ export interface Product {
   sentence: string;
   image: string;
   id: number;
-  quantity: number;
+  quantity?: number;
 }
 
 export default function Dashboard({
@@ -26,10 +26,10 @@ export default function Dashboard({
               key={id} // added key prop
               id={id}
               name={name}
-              price={price}
+              price={Number(price)}
               sentence={sentence}
               image={image}
-              quantity={quantity}
+              quantity={quantity ? quantity : 1}
             />
           );
         })}

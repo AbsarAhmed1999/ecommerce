@@ -1,219 +1,149 @@
 [
   {
     "name": "Toy Supplies",
-    "price": "104",
+    "price": 104,
     "sentence": "In gravida ligula in sapien blandit volutpat",
     "image": "https://images.pexels.com/photos/3735655/pexels-photo-3735655.jpeg",
     "id": 1
   },
   {
     "name": "Gardening Supplies",
-    "price": "100.99",
+    "price": 100.99,
     "sentence": "Donec et odio ac leo elementum lacinia",
     "image": "https://images.pexels.com/photos/2783873/pexels-photo-2783873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 2
   },
   {
     "name": "Car Thingamajig",
-    "price": "179.95",
+    "price": 179.95,
     "sentence": "Phasellus tempus justo a lectus vulputate, auctor accumsan libero interdum.",
     "image": "https://images.pexels.com/photos/4829069/pexels-photo-4829069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 3
   },
   {
     "name": "Toy Rig",
-    "price": "81",
+    "price": 81,
     "sentence": "Nunc pharetra, tortor eu placerat sagittis, ligula eros gravida neque, luctus interdum purus ipsum et diam",
     "image": "https://m.media-amazon.com/images/I/51TjJOTfslL._AC_UL320_.jpg",
     "id": 4
   },
   {
     "name": "Dining Gadget",
-    "price": "23.99",
+    "price": 23.99,
     "sentence": "In id tortor lectus",
     "image": "https://m.media-amazon.com/images/I/51-6uBmjPqL._AC_UY218_.jpg",
     "id": 5
   },
   {
     "name": "Home Improvement Thingamajig",
-    "price": "165",
+    "price": 165,
     "sentence": "Maecenas ut lorem quis mi tempor finibus at sit amet dolor",
     "image": "https://images.pexels.com/photos/3587478/pexels-photo-3587478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 6
   },
   {
     "name": "Swimming Machine",
-    "price": "97",
+    "price": 94,
     "sentence": "Mauris vel tincidunt risus",
     "image": "https://images.pexels.com/photos/2720447/pexels-photo-2720447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 7
   },
   {
     "name": "Womens Gear",
-    "price": "173.99",
+    "price": 67,
     "sentence": "Nunc faucibus nec diam mattis semper",
     "image": "https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 8
   },
   {
     "name": "Biking Equipment",
-    "price": "34.99",
+    "price": 34,
     "sentence": "Vivamus justo nulla, tempus et magna et, cursus scelerisque turpis",
     "image": "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 9
   },
   {
     "name": "Movie Instrument",
-    "price": "80.99",
+    "price": 88,
     "sentence": "Donec maximus, dui malesuada auctor suscipit, mauris felis bibendum dui, pellentesque tempor elit risus in odio",
     "image": "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 10
   },
   {
     "name": "Party Whatchamacallit",
-    "price": "84",
+    "price": 84,
     "sentence": "Mauris rhoncus, augue non faucibus vestibulum, enim lacus cursus elit, ac lobortis dolor lorem eu purus.",
     "image": "https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 11
   },
   {
     "name": "Aquarium Device",
-    "price": "33.99",
+    "price": 33,
     "sentence": "Donec ultrices in felis in tincidunt",
     "image": "https://images.pexels.com/photos/2562992/pexels-photo-2562992.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 12
   },
   {
     "name": "Music Whatchamacallit",
-    "price": "163",
+    "price": 163,
     "sentence": "Nulla libero odio, suscipit ut mattis non, tempor molestie diam",
     "image": "https://m.media-amazon.com/images/I/71zEqq8me7L._AC_SY695_.jpg",
     "id": 13
   },
   {
     "name": "Gardening Supplies",
-    "price": "150",
+    "price": 150,
     "sentence": "Mauris interdum vitae quam ac ornare",
     "image": "https://m.media-amazon.com/images/I/81D+bCgn8hL._AC_UL320_.jpg",
     "id": 14
   },
   {
     "name": "Vitamin Component",
-    "price": "119.95",
+    "price": 119,
     "sentence": "In vitae dui mi",
     "image": "https://m.media-amazon.com/images/I/81FXYudmupL._AC_UL320_.jpg",
     "id": 15
   },
   {
     "name": "Womens Whatchamacallit",
-    "price": "114.95",
+    "price": 114.95,
     "sentence": "In hac habitasse platea dictumst",
     "image": "https://m.media-amazon.com/images/I/61d-jmPhaPL._AC_UL320_.jpg",
     "id": 16
   },
   {
     "name": "Biking Tool",
-    "price": "156.99",
+    "price": 256.99,
     "sentence": "Vivamus congue, metus in fringilla facilisis, ante orci posuere turpis, nec malesuada massa nisi dignissim mi",
     "image": "https://m.media-amazon.com/images/I/811hDyamjyL._AC_UL320_.jpg",
     "id": 17
   },
   {
     "name": "Womens Gizmo",
-    "price": "45",
+    "price": 45,
     "sentence": "Ut mollis ligula quis nisi venenatis, eget venenatis tellus ultricies",
     "image": "https://m.media-amazon.com/images/I/714wcT7vGrL._AC_UL320_.jpg",
     "id": 18
   },
   {
     "name": "Bedding Doodad",
-    "price": "107.99",
+    "price": 107,
     "sentence": "Etiam gravida purus porta arcu luctus pharetra",
     "image": "https://m.media-amazon.com/images/I/61CGHv6kmWL._AC_UY218_.jpg",
     "id": 19
   },
   {
     "name": "Jewelry Apparatus",
-    "price": "75",
+    "price": 75,
     "sentence": "Ut dapibus ut odio sit amet vehicula",
     "image": "https://images-na.ssl-images-amazon.com/images/G/01/amazonglobal/images/email/asins/DURM-235399032F7D541C._V535581696_.jpg",
     "id": 20
   },
   {
     "name": "Swimming Accessory",
-    "price": "193",
+    "price": 193,
     "sentence": "Suspendisse lorem augue, dapibus ac arcu quis, molestie accumsan enim",
     "image": "https://m.media-amazon.com/images/I/91ZHCe0zeGL._AC_UL320_.jpg",
     "id": 21
-  },
-  {
-    "name": "Nutrition Device",
-    "price": "23.95",
-    "sentence": "Vivamus sapien lacus, mollis vel urna non, finibus finibus ligula.",
-    "image": "https://m.media-amazon.com/images/I/819Y-K4NE4L._AC_UL320_.jpg",
-    "id": 22
-  },
-  {
-    "name": "Bedding Device",
-    "price": "122.99",
-    "sentence": "Etiam malesuada et enim nec gravida",
-    "image": "https://m.media-amazon.com/images/I/81J6J4-ovFL._AC_UL320_.jpg",
-    "id": 23
-  },
-  {
-    "name": "Home Improvement Gizmo",
-    "price": "19",
-    "sentence": "Pellentesque elementum, velit id iaculis fermentum, felis velit molestie neque, at pharetra leo risus vitae mi",
-    "image": "https://m.media-amazon.com/images/I/71uZqXpEIrL._AC_UL320_.jpg",
-    "id": 24
-  },
-  {
-    "name": "Biking Paraphernalia",
-    "price": "163",
-    "sentence": "Aliquam imperdiet bibendum nisi vitae condimentum",
-    "image": "https://m.media-amazon.com/images/I/71x8eJYN4JL._AC_UL320_.jpg",
-    "id": 25
-  },
-  {
-    "name": "Vitamin Thingamajig",
-    "price": "112.95",
-    "sentence": "Donec iaculis ante in arcu hendrerit euismod",
-    "image": "https://m.media-amazon.com/images/I/618IhmL94uL._AC_UL320_.jpg",
-    "id": 26
-  },
-  {
-    "name": "Computer Rig",
-    "price": "80",
-    "sentence": "Mauris rhoncus, augue non faucibus vestibulum, enim lacus cursus elit, ac lobortis dolor lorem eu purus.",
-    "image": "https://m.media-amazon.com/images/I/71DwVFhj3AL._AC_UL320_.jpg",
-    "id": 27
-  },
-  {
-    "name": "Bath Attachment",
-    "price": "194.99",
-    "sentence": "Etiam pretium erat non elit tempor, quis pretium nisi condimentum",
-    "image": "https://m.media-amazon.com/images/I/61jAQ2UtPDL._AC_UL320_.jpg",
-    "id": 28
-  },
-  {
-    "name": "Truck Contraption",
-    "price": "31.99",
-    "sentence": "Donec accumsan sapien vel nulla tristique, id convallis risus commodo",
-    "image": "https://m.media-amazon.com/images/I/71zZF1j5TaL._AC_UL320_.jpg",
-    "id": 29
-  },
-  {
-    "name": "Vitamin Rig",
-    "price": "120.99",
-    "sentence": "Vivamus mauris quam, accumsan at metus ut, ullamcorper luctus sem",
-    "image": "https://m.media-amazon.com/images/I/71awxc1RPRL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
-    "id": 30
-  },
-  {
-    "name": "Tire Thingamajig",
-    "price": "74.95",
-    "sentence": "Cras pulvinar ipsum vulputate, hendrerit quam ut, ullamcorper lectus.",
-    "image": "https://m.media-amazon.com/images/I/61YQeAUIboL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
-    "id": 31
   }
 ]

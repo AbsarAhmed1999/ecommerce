@@ -15,10 +15,11 @@ import ProfileDropdown from "@/Components/ProfileDropDown";
 
 interface filteredData {
   name: string;
-  price: string;
+  price: number;
   sentence: string;
   image: string;
   id: number;
+  quantity?: number;
 }
 
 export default function Layout() {

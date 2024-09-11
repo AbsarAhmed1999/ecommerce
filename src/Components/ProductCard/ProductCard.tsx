@@ -7,7 +7,7 @@ interface ProductProps {
   image: string;
   price: number;
   sentence: string;
-  quantity: number;
+  quantity?: number;
 }
 
 export function ProductCard({
