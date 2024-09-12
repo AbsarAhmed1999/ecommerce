@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import "@/app/globals.css";
+import "../globals.css";
 import { useRouter } from "next/navigation";
 import { JwtAuthService } from "../utils/jwt-service";
 import CircularIndeterminate from "@/Components/Loading";
