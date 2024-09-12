@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import "../globals.css";
 import { useSelector } from "react-redux";
 import { selectCartItemsCount } from "@/app/redux/slices/Cart/index";
 import SearchBar from "@/Components/SearchBar/SearchBar";

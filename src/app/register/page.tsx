@@ -4,7 +4,6 @@ import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
-import "@/app/globals.css";
 import CircularIndeterminate from "@/Components/Loading";
 import Link from "next/link";
 import BackButton from "@/Components/BackButton/BackButton";

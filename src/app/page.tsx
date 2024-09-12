@@ -1,5 +1,4 @@
 "use client";
-import "../app/globals.css";
 import AboutUs from "@/Components/AboutUs";
 import CustomerReviews from "@/Components/CustomerReviews/CustomerReviews";
 import Footer from "@/Components/footer/footer";

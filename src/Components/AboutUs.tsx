@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../app/globals.css";
 import { motion } from "framer-motion";
 
 export default function AboutUs() {
