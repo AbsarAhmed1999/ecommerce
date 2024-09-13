@@ -47,3 +47,150 @@
   font-size: 1rem; /* Standard font size for content */
   color: #856404; /* Medium dark color for text */
 }
+/* Global styles for the container */
+#container {
+  position: relative;
+  background-color: #262054;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Ensure circles don't overflow */
+}
+
+/* Hide circles on mobile and tablet screens */
+@media (max-width: 1024px) {
+  .circles-container {
+    display: none;
+  }
+}
+
+/* Show circles on larger screens */
+@media (min-width: 1025px) {
+  .circles-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .gradient1 {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.6), 0 0 30px rgba(255, 165, 0, 0.4),
+      0 0 60px rgba(255, 165, 0, 0.2);
+  }
+
+  .gradient2 {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #00aaff, #004e92);
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.6), 0 0 30px rgba(0, 170, 255, 0.4),
+      0 0 60px rgba(0, 170, 255, 0.2);
+  }
+
+  .gradient3 {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #7f00ff, #e100ff);
+  }
+}
+
+/* Line image */
+.line-image {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.line-image img {
+  width: auto;
+  height: 100px;
+}
+
+/* Form container */
+.form-container {
+  position: relative;
+  background-color: #262054;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  z-index: 1; /* Ensure form is above other elements */
+}
+
+/* Title and logo */
+.login-title {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.login-logo {
+  width: 100px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Form inputs */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  background-color: transparent;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+}
+
+/* Buttons */
+.forgot-password-button {
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 10px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff007f;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.submit-button:hover {
+  background-color: #e60073;
+}
+
+.register-link {
+  color: white;
+  text-decoration: underline;
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+}

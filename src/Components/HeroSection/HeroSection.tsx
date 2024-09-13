@@ -28,14 +28,16 @@ export default function HeroSection() {
           variants={variants}
           className="flex flex-col items-center"
         >
+          {/* Responsive text size based on screen size */}
           <motion.h1
             variants={variants}
-            className="text-6xl font-bold mb-6 text-center"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center"
           >
             Your Best Ecommerce Website
           </motion.h1>
+
           <Link href="/login">
-            <button className=" bg-yellow-500 text-black py-3 px-6 rounded-lg text-lg font-semibold hover:bg-yellow-400 transition duration-300 mt-4 border-white hover:border-2 ">
+            <button className="bg-yellow-500 text-black py-2 px-4 sm:py-3 sm:px-6 rounded-lg text-base sm:text-lg font-semibold hover:bg-yellow-400 transition duration-300 mt-4 border-white hover:border-2">
               Shop Now
             </button>
           </Link>

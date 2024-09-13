@@ -10,7 +10,7 @@ import {
 } from "@/app/redux/slices/Cart";
 import CircularIndeterminate from "@/Components/Loading";
 import { useAuthCheck } from "../Auth/useAuthCheck";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import BackButton from "@/Components/BackButton/BackButton";
 import { useRouter } from "next/navigation";
 
@@ -57,14 +57,14 @@ const CartPage = () => {
         {cartItems.length === 0 ? (
           <div className="text-center">
             <p className="text-xl text-white mb-4">Your cart is empty</p>
-            <Button
+            <button
               onClick={handleContinueShopping}
-              variant="contained"
-              size="large"
+              // variant="contained"
+              // size="large"
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
             >
               Continue Shopping
-            </Button>
+            </button>
           </div>
         ) : (
           <div className="w-full max-w-4xl bg-white shadow-2xl rounded-lg p-6">
@@ -108,22 +108,22 @@ const CartPage = () => {
               </p>
             </div>
             <div className="flex justify-between mt-6">
-              <Button
+              <button
                 onClick={clearAllItems}
-                variant="contained"
-                size="medium"
+                // variant="contained"
+                // size="medium"
                 className="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
               >
                 Clear All Items
-              </Button>
-              <Button
+              </button>
+              <button
                 onClick={handleCheckout}
-                variant="contained"
-                size="medium"
+                // variant="contained"
+                // size="medium"
                 className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
               >
                 Proceed to Checkout
-              </Button>
+              </button>
             </div>
           </div>
         )}

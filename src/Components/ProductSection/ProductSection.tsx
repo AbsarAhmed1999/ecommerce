@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { useInView } from "react-intersection-observer";
-
+import "./ProductSection.css";
 // Product Card Component with Hover Effect
 const ProductCard = ({ image, title }: any) => (
   <motion.div
@@ -15,7 +15,7 @@ const ProductCard = ({ image, title }: any) => (
       loading="lazy"
       className="w-full h-40 object-cover rounded-lg mb-4"
     />
-    <h3 className="text-lg font-semibold">{title}</h3>
+    <h3 className="text-lg font-semibold text-center">{title}</h3>
   </motion.div>
 );
 
@@ -36,17 +36,17 @@ export default function ProductSection() {
 
   return (
     <div
-      className="relative w-screen min-h-screen overflow-hidden"
+      className="relative w-screen min-h-screen overflow-hidden .flex-container"
       style={gradientStyle}
       ref={sectionRef} // Attach ref to the section
     >
       {/* Title and Description Section */}
-      <div className="flex flex-col items-center justify-center w-full h-full text-white p-20">
+      <div className="flex flex-col items-center justify-center w-full h-full text-white p-6 sm:p-12 md:p-20 lg:p-24">
         <motion.h1
           variants={variants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="text-5xl font-bold mb-6"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center"
         >
           Our Products
         </motion.h1>
@@ -54,7 +54,7 @@ export default function ProductSection() {
           variants={variants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="text-lg max-w-lg text-center"
+          className="text-base sm:text-lg md:text-xl max-w-lg text-center"
         >
           Discover our range of high-quality products. Each item is crafted with
           care to ensure the best experience for you.
@@ -62,8 +62,8 @@ export default function ProductSection() {
       </div>
 
       {/* Products Grid Section */}
-      <div className="absolute inset-x-0 bottom-0 pt-20 pb-10 px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="absolute inset-x-0 bottom-0 pt-10 pb-10 px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {/* Example product cards */}
           <ProductCard image="./product1.jpg" title="Product 1" />
           <ProductCard image="./product2.jpg" title="Product 2" />

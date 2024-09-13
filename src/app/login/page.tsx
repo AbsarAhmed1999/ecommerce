@@ -122,118 +122,76 @@ export default function Login() {
   }
 
   return (
-    <div
-      className="min-h-screen flex items-center  "
-      style={{ backgroundColor: "#262054 " }}
-    >
-      <BackButton className="mb-4 absolute top-10 left-10" push="/">
+    <div id="container" className="container">
+      <BackButton className="back-button" push="/">
         Go Back
       </BackButton>
-      {/* Circles positioned absolutely */}
-      <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2 flex flex-col items-center space-y-8">
-        {/* Circle with gradient 1 */}
-        <div
-          className="absolute bottom-[100px] w-32 h-32 rounded-full flex items-center justify-center"
-          style={{
-            background: "linear-gradient(135deg, #ff7e5f, #feb47b)", // Gradient from coral to light peach
-            boxShadow: `
-            0 0 15px rgba(255, 165, 0, 0.6), 
-            0 0 30px rgba(255, 165, 0, 0.4), 
-            0 0 60px rgba(255, 165, 0, 0.2)
-          `,
-          }}
-        ></div>
 
-        {/* Circle with gradient 2 */}
-        <div
-          className="absolute  top-0 w-24 h-24 rounded-full flex items-center justify-center"
-          style={{
-            background: "linear-gradient(135deg, #00aaff, #004e92)", // Gradient from light blue to dark blue
-            boxShadow: `
-            0 0 15px rgba(0, 170, 255, 0.6), 
-            0 0 30px rgba(0, 170, 255, 0.4), 
-            0 0 60px rgba(0, 170, 255, 0.2)
-          `,
-          }}
-        ></div>
-
-        {/* Circle with gradient 3 */}
-        <div
-          className="absolute left-28 bottom-[-60px] w-40 h-40 rounded-full flex items-center justify-center"
-          style={{
-            background: "linear-gradient(135deg, #7F00FF, #E100FF)",
-          }}
-        ></div>
-      </div>
-      <div>
-        <img src="./line.png" className="ml-[620px]" />
+      {/* Circles container */}
+      <div className="circles-container">
+        <div className="circle gradient1"></div>
+        <div className="circle gradient2"></div>
+        <div className="circle gradient3"></div>
       </div>
 
-      <div
-        className="absolute right-72 w-96 h-auto p-5 rounded-lg "
-        style={{ backgroundColor: "#262054" }}
-      >
-        <div className="flex flex-col gap-4">
-          <h1 className="text-4xl font-bold mb-4 ml-16 text-white">LOGIN</h1>
-          <img src="./login-logo.png" className="w-40 ml-10" />
-          {/* Login Form */}
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ isSubmitting }) => (
-              <Form>
-                <div className="flex flex-col gap-1 mb-4">
-                  <Field
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="email"
-                    className="p-2 border border-white rounded-full placeholder-gray-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="text-red-500 font-bold text-base"
-                  />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <Field
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="password"
-                    className="p-2 border border-white rounded-full placeholder-gray-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300"
-                  />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="text-red-500 font-bold text-base "
-                  />
-                </div>
-                <button className=" text-white hover:underline focus:outline-none hover:text-blue-700 mt-3">
-                  <Link href={"/forgot-password"} legacyBehavior>
-                    <a> Forgot password ?</a>
-                  </Link>
-                </button>
-                <button
-                  type="submit"
-                  className="w-80 mt-4 p-2 px-4 bg-pink-500 border border-white rounded-full text-white font-semibold text-lg hover:bg-pink-400 "
-                >
-                  {isSubmitting ? "Logging in..." : "Login"}
-                </button>
-              </Form>
-            )}
-          </Formik>
+      {/* Line image */}
+      <div className="line-image">
+        <img src="./line.png" alt="Line Decoration" />
+      </div>
 
-          <Link href="/register" passHref>
-            {" "}
-            <a className="text-white underline hover:text-blue-700 ml-10">
-              Don't Have Account ? Register Now
-            </a>
-          </Link>
-        </div>
+      {/* Form container */}
+      <div className="form-container">
+        <h1 className="login-title">LOGIN</h1>
+        <img src="./login-logo.png" className="login-logo" alt="Login Logo" />
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting }) => (
+            <Form>
+              <div className="form-group">
+                <Field
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="email"
+                  className="form-input"
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="error-message"
+                />
+              </div>
+              <div className="form-group">
+                <Field
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="password"
+                  className="form-input"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="error-message"
+                />
+              </div>
+              <button className="forgot-password-button">
+                <Link href={"/forgot-password"} legacyBehavior>
+                  <a> Forgot password ?</a>
+                </Link>
+              </button>
+              <button type="submit" className="submit-button">
+                {isSubmitting ? "Logging in..." : "Login"}
+              </button>
+            </Form>
+          )}
+        </Formik>
+        <Link href="/register" passHref>
+          <a className="register-link">Don't Have Account ? Register Now</a>
+        </Link>
       </div>
     </div>
   );
