@@ -31,6 +31,7 @@ const ProfileDropdown = ({ isOpen, toggleDropdown }: ProfileDropdownProps) => {
           <ul className="space-y-3 px-5 py-3 dark:text-white">
             <li className="font-medium">
               <Link
+                legacyBehavior
                 href="/cart"
                 className="flex items-center p-2 text-gray-900 dark:text-white hover:border-r-4 hover:border-indigo-700 dark:hover:border-indigo-700 transition-colors duration-200"
               >

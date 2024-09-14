@@ -36,7 +36,7 @@ export default function HeroSection() {
             Your Best Ecommerce Website
           </motion.h1>
 
-          <Link href="/login">
+          <Link href="/login" legacyBehavior>
             <button className="bg-yellow-500 text-black py-2 px-4 sm:py-3 sm:px-6 rounded-lg text-base sm:text-lg font-semibold hover:bg-yellow-400 transition duration-300 mt-4 border-white hover:border-2">
               Shop Now
             </button>

@@ -76,7 +76,7 @@ export default function Layout() {
             <SearchBar setQuery={setQuery} />
           </div>
           <div className="flex items-center space-x-8">
-            <Link href="/cart">
+            <Link href="/cart" legacyBehavior>
               <div className="relative h-10 w-10 cursor-pointer">
                 <img
                   src="/trolley.png"

@@ -179,8 +179,8 @@ export default function Login() {
                 />
               </div>
               <button className="forgot-password-button">
-                <Link href={"/forgot-password"} legacyBehavior>
-                  <a> Forgot password ?</a>
+                <Link href={"/forgot-password"}>
+                  {/* <a> Forgot password ?</a> */}
                 </Link>
               </button>
               <button type="submit" className="submit-button">
@@ -190,7 +190,7 @@ export default function Login() {
           )}
         </Formik>
         <Link href="/register" passHref>
-          <a className="register-link">Don't Have Account ? Register Now</a>
+          {/* <a className="register-link">Don't Have Account ? Register Now</a> */}
         </Link>
       </div>
     </div>

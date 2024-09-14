@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
+    await connectToMongoDB(); // Ensure DB is connected
     const body = await req.json();
     const response = await loginUserService(body);
     return response;
