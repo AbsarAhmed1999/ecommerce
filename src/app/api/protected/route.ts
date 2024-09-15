@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { JwtAuthService } from "@/app/utils/jwt-service";
 import { registerUserServiceThroughGoogle } from "@/Service/googleUserService";
+import { connectToMongoDB } from "@/database/connection";
 
 export async function POST(req: NextRequest) {
-  const jwtAuthService = new JwtAuthService();
   const token = req.cookies.get("token")?.value;
   const body = await req.json();
   const { userInfo } = body;
@@ -25,6 +24,7 @@ export async function POST(req: NextRequest) {
   } = userInfo;
 
   try {
+    await connectToMongoDB();
     // Handle Google OAuth login
     if (userInfo) {
       const googleUser = {

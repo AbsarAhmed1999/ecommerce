@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyOTP } from "@/Service/verifyOtpService";
+import { connectToMongoDB } from "@/database/connection";
 export async function POST(req: NextRequest) {
-  console.log("PSOT HAHAHA");
   try {
+    await connectToMongoDB(); // Ensure DB is connected
     const body = await req.json();
     console.log("Insdie verify otp");
     const { email, otp } = body;

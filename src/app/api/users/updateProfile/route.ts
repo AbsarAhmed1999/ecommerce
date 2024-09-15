@@ -1,8 +1,10 @@
+import { connectToMongoDB } from "@/database/connection";
 import { profileUserService } from "@/Service/profileUserService";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(req: NextRequest) {
   try {
+    await connectToMongoDB(); // Ensure DB is connected
     const body = await req.json();
     const response = await profileUserService(body);
     return response;
