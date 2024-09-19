@@ -9,9 +9,9 @@ import { setUser } from "../redux/slices/User";
 import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import Swal from "sweetalert2";
-import "./login.css";
 import BackButton from "@/Components/BackButton/BackButton";
 import { useAuthCheck } from "../Auth/useAuthCheck";
+import "./login.css";
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
@@ -122,41 +122,26 @@ export default function Login() {
   }
 
   return (
-    <div id="container" className="container">
-      <BackButton className="back-button" push="/">
-        Go Back
-      </BackButton>
-
-      {/* Circles container */}
-      <div className="circles-container">
-        <div className="circle gradient1"></div>
-        <div className="circle gradient2"></div>
-        <div className="circle gradient3"></div>
-      </div>
-
-      {/* Line image */}
-      <div className="line-image">
-        <img src="./line.png" alt="Line Decoration" />
-      </div>
-
-      {/* Form container */}
+    <div className="backgroundContainer h-lvh ">
+      <BackButton>Go Back</BackButton>
       <div className="form-container">
-        <h1 className="login-title">LOGIN</h1>
-        <img src="./login-logo.png" className="login-logo" alt="Login Logo" />
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (
-            <Form>
+            <Form className="absolute inset-1 p-12 rounded-lg z-20 flex flex-col">
+              <h2 className="text-white font-bold text-3xl text-center tracking-wide">
+                Sign In
+              </h2>
               <div className="form-group">
                 <Field
                   type="email"
                   id="email"
                   name="email"
                   placeholder="email"
-                  className="form-input"
+                  className="form-input relative w-[300px] mt-10 p-1 bg-transparent outline-none shadow-none text-base text-white tracking-wide transition-all duration-500 "
                 />
                 <ErrorMessage
                   name="email"
@@ -170,7 +155,7 @@ export default function Login() {
                   id="password"
                   name="password"
                   placeholder="password"
-                  className="form-input"
+                  className="form-input relative w-[300px] mt-5 p-1 bg-transparent outline-none text-white text-base  tracking-wide transition-all duration-500 "
                 />
                 <ErrorMessage
                   name="password"
@@ -178,20 +163,28 @@ export default function Login() {
                   className="error-message"
                 />
               </div>
-              <button className="forgot-password-button">
-                <Link href={"/forgot-password"}>
-                  {/* <a> Forgot password ?</a> */}
-                </Link>
-              </button>
-              <button type="submit" className="submit-button">
+              <div className="flex space-x-20 mt-5">
+                <button className="forgot-password-button text-white link">
+                  <Link href="/forgot-password" legacyBehavior>
+                    <a> Forgot password ?</a>
+                  </Link>
+                </button>
+                <button className=" text-white link ">
+                  <Link href="/register" legacyBehavior>
+                    <a className="register-link">Sign up</a>
+                  </Link>
+                </button>
+              </div>
+
+              <button
+                type="submit"
+                className="submit-button mt-5  text-xl bg-white p-1"
+              >
                 {isSubmitting ? "Logging in..." : "Login"}
               </button>
             </Form>
           )}
         </Formik>
-        <Link href="/register" passHref>
-          {/* <a className="register-link">Don't Have Account ? Register Now</a> */}
-        </Link>
       </div>
     </div>
   );

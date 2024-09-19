@@ -10,7 +10,7 @@ import {
 } from "@/app/redux/slices/Cart";
 import CircularIndeterminate from "@/Components/Loading";
 import { useAuthCheck } from "../Auth/useAuthCheck";
-// import { Button } from "@mui/material";
+import { Button } from "@mui/material";
 import BackButton from "@/Components/BackButton/BackButton";
 import { useRouter } from "next/navigation";
 
@@ -32,7 +32,7 @@ const CartPage = () => {
   };
 
   const handleContinueShopping = () => {
-    router.push("/products"); // Adjust the path to your product listing page
+    router.push("/dashboard"); // Adjust the path to your product listing page
   };
 
   const handleCheckout = () => {
@@ -50,9 +50,7 @@ const CartPage = () => {
   return (
     authenticated && (
       <div className="min-h-screen flex flex-col items-center bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 p-6">
-        <BackButton className="mb-4 absolute top-10 left-10">
-          Go Back
-        </BackButton>
+        <BackButton>Go Back</BackButton>
         <h1 className="text-4xl font-extrabold text-white mb-8">Your Cart</h1>
         {cartItems.length === 0 ? (
           <div className="text-center">
@@ -89,12 +87,12 @@ const CartPage = () => {
                     </div>
                   </div>
                   <div>
-                    <button
+                    <Button
                       onClick={() => handleRemoveItem(item.id)}
                       className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition duration-200"
                     >
                       Remove
-                    </button>
+                    </Button>
                   </div>
                 </li>
               ))}
@@ -108,22 +106,22 @@ const CartPage = () => {
               </p>
             </div>
             <div className="flex justify-between mt-6">
-              <button
+              <Button
                 onClick={clearAllItems}
-                // variant="contained"
-                // size="medium"
+                variant="contained"
+                size="medium"
                 className="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
               >
                 Clear All Items
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={handleCheckout}
-                // variant="contained"
-                // size="medium"
+                variant="contained"
+                size="medium"
                 className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
               >
                 Proceed to Checkout
-              </button>
+              </Button>
             </div>
           </div>
         )}

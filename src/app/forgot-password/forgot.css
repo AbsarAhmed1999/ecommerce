@@ -1,0 +1,35 @@
+.backgroundContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #23242a;
+}
+
+.form-container {
+  position: relative;
+  width: 380px; /* Keep this consistent with other forms */
+  min-height: 420px; /* Match the minimum height with the login form */
+  background-color: #1c1c1c;
+  border-radius: 8px;
+  padding: 2rem; /* Add padding for spacing */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Add a slight shadow for depth */
+  z-index: 2;
+}
+
+.form-input {
+  width: 100%; /* Full width */
+  padding: 10px;
+  border: 1px solid white;
+  background: transparent;
+  color: white; /* Make text color white for better readability */
+  transition: background-color 0.3s ease, border 0.3s ease;
+  border-radius: 5px; /* Add some border radius */
+}
+
+.form-input:focus {
+  background: white; /* White background on focus */
+  border: 1px solid #45f3ff; /* Highlight border */
+  color: black; /* Change text color to black */
+  outline: none; /* Remove default outline */
+}

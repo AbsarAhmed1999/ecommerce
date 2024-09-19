@@ -33,7 +33,7 @@ export default function HeroSection() {
             variants={variants}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center"
           >
-            Your Best Ecommerce Website
+            Absar Ecommerce Website
           </motion.h1>
 
           <Link href="/login" legacyBehavior>

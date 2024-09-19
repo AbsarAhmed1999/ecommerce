@@ -10,6 +10,7 @@ import BackButton from "@/Components/BackButton/BackButton";
 import { useGoogleLogin } from "@react-oauth/google";
 import { setUser } from "../redux/slices/User";
 import { useDispatch } from "react-redux";
+import "./register.css";
 // import Navbar from "@/Components/Navbar/navbar";
 // Define Yup schema for validation
 const validationSchema = Yup.object().shape({
@@ -133,33 +134,28 @@ const RegistrationForm = () => {
     handleGoogleLogin(); // Call the login function
   };
   return (
-    <div
-      className="min-h-screen flex items-center justify-center"
-      style={{ backgroundColor: "#262054" }}
-    >
-      <BackButton className="mb-4 absolute top-10 left-10">Go Back</BackButton>
+    <div className="backgroundContainer h-lvh ">
+      <BackButton>Go Back</BackButton>
 
-      <div className="absolute right-54 w-96 h-auto p-4 rounded-lg ">
-        <div className="flex flex-col gap-4">
-          <h1 className="text-3xl font-bold mb-1 ml-16 text-white">
-            REGISTER NOW
-          </h1>
-          <img src="./login-logo.png" className="w-32 ml-28" />
-          {/* Registration Form */}
-          <Formik
-            initialValues={intialValue} // Set initial values
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ isSubmitting }) => (
-              <Form>
-                <div className="flex flex-col gap-1 mb-4">
+      <div className="form-container">
+        <Formik
+          initialValues={intialValue} // Set initial values
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting }) => (
+            <Form>
+              <h2 className="text-white font-bold text-3xl text-center tracking-wide mt-5">
+                Sign Up
+              </h2>
+              <div className="ml-10">
+                <div className="flex flex-col gap-1">
                   <Field
                     type="text"
                     id="fullName"
                     name="fullName"
                     placeholder="Full Name"
-                    className="p-2 border border-gray-300 rounded-full placeholder-gray-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                    className="form-input relative w-[300px] mt-10 p-1 bg-transparent outline-none shadow-none text-base text-white tracking-wide transition-all duration-500 "
                   />
                   <ErrorMessage
                     name="fullName"
@@ -167,13 +163,13 @@ const RegistrationForm = () => {
                     className="text-red-500 font-bold text-base"
                   />
                 </div>
-                <div className="flex flex-col gap-1 mb-4">
+                <div className="flex flex-col ">
                   <Field
                     type="email"
                     id="email"
                     name="email"
                     placeholder="Email"
-                    className="p-2 border border-gray-300 rounded-full placeholder-gray-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                    className="form-input relative w-[300px] mt-5 p-1 bg-transparent outline-none shadow-none text-base text-white tracking-wide transition-all duration-500 "
                   />
                   <ErrorMessage
                     name="email"
@@ -181,13 +177,13 @@ const RegistrationForm = () => {
                     className="text-red-500 font-bold text-base"
                   />
                 </div>
-                <div className="flex flex-col gap-1 mb-4">
+                <div className="flex flex-col gap-1">
                   <Field
                     type="password"
                     id="password"
                     name="password"
                     placeholder="Password"
-                    className="p-2 border border-gray-300 rounded-full placeholder-gray-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                    className="form-input relative w-[300px] mt-5 p-1 bg-transparent outline-none shadow-none text-base text-white tracking-wide transition-all duration-500 "
                   />
                   <ErrorMessage
                     name="password"
@@ -195,38 +191,37 @@ const RegistrationForm = () => {
                     className="text-red-500 font-bold text-base"
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="w-full  p-2 px-4 bg-pink-500 border border-gray-300 rounded-full text-white font-semibold text-lg hover:bg-pink-400 transition duration-200"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Registering..." : "Register"}
-                </button>
-              </Form>
-            )}
-          </Formik>
+              </div>
+              <div className="mt-5">
+                <Link href={"/login"} className="link ml-10">
+                  Already have an Account ? Sign In
+                </Link>
+              </div>
+              <button
+                type="submit"
+                className="w-52 ml-20 mt-10  bg-white border border-white rounded-full  font-semibold text-lg hover:bg-gray-400 transition duration-200"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Registering..." : "Register"}
+              </button>
+              <button
+                onClick={handleClick}
+                className="w-52 ml-20 bg-red-500 text-white py-2 px-2 rounded-lg hover:bg-red-700 transition duration-200 mt-5"
+              >
+                Continue with Google
+              </button>
+            </Form>
+          )}
+        </Formik>
 
-          <div className="mt-1 text-center">
-            <button
-              onClick={handleClick}
-              className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-200"
-            >
-              Continue with Google
-            </button>
-          </div>
-
-          <Link href="/login" legacyBehavior>
+        {/* <Link href="/login" legacyBehavior>
             <a className="text-white underline hover:text-blue-700 block text-center">
               Already have an account? Log in
             </a>
-          </Link>
-        </div>
+          </Link> */}
       </div>
     </div>
   );
 };
 
 export default RegistrationForm;
-function dispatch(arg0: any) {
-  throw new Error("Function not implemented.");
-}

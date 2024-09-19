@@ -3,10 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, selectUser } from "@/app/redux/slices/User";
-import Avatar from "@/Components/Avatar"; // Adjust the path according to your project structure
 import BackButton from "@/Components/BackButton/BackButton";
 import { useRouter } from "next/navigation";
-
+import Swal from "sweetalert2";
 export default function Profile() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -39,6 +38,26 @@ export default function Profile() {
     }
   };
 
+  const showProfileUpdate = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Profile Updated Successfully",
+      toast: true, // Use toast-style alert for non-blocking notifications
+      position: "top-end",
+      timer: 3500,
+      showConfirmButton: false,
+      background: "#e0f5ec", // Light green background
+      iconColor: "#28a745", // Icon color for success (green)
+      showClass: {
+        popup: "swal2-grow-row", // Grow animation from left to right
+      },
+    }).then(() => {
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1000); // Short delay to show loader
+    });
+  };
+
   const handleSaveChanges = async () => {
     console.log("INSIDE HANDLE SAVE CHANGES");
     try {
@@ -57,13 +76,8 @@ export default function Profile() {
       console.log("RESULT inside profilePage", result);
       console.log("response.ok", response.ok);
       if (response.ok) {
-        // const result = await response.json(); // causing errors
-        console.log("Updated User:", result.user);
-        // problem is here
-        // I get result inside result I am having id as _id
         dispatch(setUser(result?.user));
-        alert("Profile updated successfully!");
-        router.push("/dashboard");
+        showProfileUpdate();
       } else {
         alert("Failed to update profile");
       }
@@ -73,11 +87,23 @@ export default function Profile() {
     }
   };
 
+  // const showToastMessage = (message: string) => {
+  //   toast.success(message, {
+  //     position: "top-right",
+  //     style: {
+  //       backgroundColor: "green", // Custom success background color
+  //       color: "white", // Custom text color
+  //       width: "100px",
+  //     },
+  //   });
+  // };
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center py-10">
       <BackButton>Go Back</BackButton>
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
         <div className="text-center mb-6">
+          {/* <ToastContainer /> */}
           <div className="relative">
             <img
               className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
@@ -137,7 +163,7 @@ export default function Profile() {
               Save Changes
             </button>
           </div>
-        </div>
+        </div>{" "}
       </div>
     </div>
   );

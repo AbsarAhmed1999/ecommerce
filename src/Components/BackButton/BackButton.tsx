@@ -2,21 +2,17 @@ import React from "react";
 import { useRouter } from "next/navigation"; // Assuming you are using Next.js
 import "./backbutton.css"; // If you have additional custom styles
 
-const BackButton = ({
-  className = "mb-4 absolute top-10 left-10",
-  children = "Back",
-  push = "/",
-}) => {
+const BackButton = ({ children = "Back" }) => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.back();
+    router.push("/");
   };
 
   return (
     <button
       onClick={handleClick}
-      className={`flex items-center px-5 py-2.5 text-black rounded-lg shadow-md hover:opacity-90 transition-opacity duration-300 ${className}`}
+      className={`flex absolute top-10 left-10 items-center px-5 py-2.5 text-black rounded-lg shadow-md hover:opacity-90 transition-opacity duration-300 `}
       aria-label="Go back"
       style={{
         backgroundColor: "rgba(255, 221, 51, 1)",

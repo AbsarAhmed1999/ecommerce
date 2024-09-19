@@ -1,0 +1,64 @@
+.backgroundContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #23242a;
+}
+
+.form-container {
+  position: relative;
+  width: 380px;
+  min-height: 550px;
+  background-color: #1c1c1c;
+  border-radius: 8px;
+  /* overflow: hidden; */
+  z-index: 2; /* Ensure the container is above the pseudo-element */
+}
+
+.error-message {
+  color: red;
+}
+
+/* Style for the input fields */
+.form-input {
+  border: 1px solid white; /* Thin white border initially */
+  padding: 10px; /* Adjust padding as needed */
+  background: transparent; /* Transparent background initially */
+  color: black; /* Text color */
+  transition: background-color 0.3s ease, border 0.3s ease; /* Smooth transition */
+  box-sizing: border-box; /* Ensure padding and border are included in the width and height */
+}
+
+/* Focus state for the input fields */
+.form-input:focus {
+  background: white; /* White background on focus */
+  border: 1px solid white; /* Maintain or adjust border if needed */
+  color: black; /* Ensure text color is readable against the white background */
+  outline: none; /* Remove default browser outline */
+}
+
+/* styles.css */
+.link {
+  color: #007bff; /* Link color */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Bold text */
+}
+
+.link:hover {
+  color: #0056b3; /* Darker shade on hover */
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Solid border effect using ::before */
+.form-container::before {
+  content: "";
+  position: absolute;
+  top: -5px; /* Adjust based on desired border width */
+  left: -5px; /* Adjust based on desired border width */
+  width: calc(100% + 10px); /* Adjust based on desired border width */
+  height: calc(100% + 10px); /* Adjust based on desired border width */
+  border-radius: 8px; /* Match the border radius of the form container */
+  border: 5px solid #45f3ff; /* Set the border color and width */
+  z-index: -1; /* Ensure the pseudo-element is behind the form container */
+}
