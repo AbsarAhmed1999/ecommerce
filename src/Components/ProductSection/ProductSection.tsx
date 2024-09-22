@@ -2,20 +2,21 @@ import { motion } from "framer-motion";
 import React from "react";
 import { useInView } from "react-intersection-observer";
 import "./ProductSection.css";
+
 // Product Card Component with Hover Effect
 const ProductCard = ({ image, title }: any) => (
   <motion.div
-    className="bg-white p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
-    whileHover={{ scale: 1.2 }} // Optionally use framer-motion for more control
+    className="bg-white p-2 sm:p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+    whileHover={{ scale: 1.1 }} // Slightly reduced hover scale for smaller products
     transition={{ duration: 0.3 }}
   >
     <img
       src={image}
       alt={title}
       loading="lazy"
-      className="w-full h-40 object-cover rounded-lg mb-4"
+      className="w-full h-32 sm:h-40 object-cover rounded-lg mb-4"
     />
-    <h3 className="text-lg font-semibold text-center">{title}</h3>
+    <h3 className="text-sm sm:text-lg font-semibold text-center">{title}</h3>
   </motion.div>
 );
 
@@ -36,17 +37,17 @@ export default function ProductSection() {
 
   return (
     <div
-      className="relative w-screen min-h-screen overflow-hidden .flex-container"
+      className="relative w-screen min-h-screen overflow-hidden flex flex-col items-center"
       style={gradientStyle}
       ref={sectionRef} // Attach ref to the section
     >
       {/* Title and Description Section */}
-      <div className="flex flex-col items-center justify-center w-full h-full text-white p-6 sm:p-12 md:p-20 lg:p-24">
+      <div className="flex flex-col items-center justify-center w-full text-white p-6 sm:p-12 md:p-20 lg:p-24">
         <motion.h1
           variants={variants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-center"
         >
           Our Products
         </motion.h1>
@@ -54,7 +55,7 @@ export default function ProductSection() {
           variants={variants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="text-base sm:text-lg md:text-xl max-w-lg text-center"
+          className="text-base sm:text-lg md:text-xl max-w-md text-center mb-10"
         >
           Discover our range of high-quality products. Each item is crafted with
           care to ensure the best experience for you.
@@ -62,8 +63,8 @@ export default function ProductSection() {
       </div>
 
       {/* Products Grid Section */}
-      <div className="absolute inset-x-0 bottom-0 pt-10 pb-10 px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+      <div className="w-full px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Example product cards */}
           <ProductCard image="./product1.jpg" title="Product 1" />
           <ProductCard image="./product2.jpg" title="Product 2" />

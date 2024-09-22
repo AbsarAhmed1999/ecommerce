@@ -163,13 +163,13 @@ export default function Login() {
                   className="error-message"
                 />
               </div>
-              <div className="flex space-x-20 mt-5">
-                <button className="forgot-password-button text-white link">
+              <div className="flex justify-between items-center mt-5 space-x-5">
+                <button className="forgot-password-button text-white link whitespace-nowrap">
                   <Link href="/forgot-password" legacyBehavior>
-                    <a> Forgot password ?</a>
+                    <a>Forgot password?</a>
                   </Link>
                 </button>
-                <button className=" text-white link ">
+                <button className="text-white link whitespace-nowrap">
                   <Link href="/register" legacyBehavior>
                     <a className="register-link">Sign up</a>
                   </Link>

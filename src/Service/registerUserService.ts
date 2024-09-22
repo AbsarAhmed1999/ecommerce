@@ -29,18 +29,24 @@ export async function registerUserService(userInput: UserInput) {
       { status: 409 }
     );
   }
-
+  console.log(
+    "DURING registration I got fullName, email & password",
+    fullName,
+    email,
+    password
+  );
   const salt = 10;
   const hashedPassword = await bcrypt.hash(password, salt);
   //instantiate jwt auth service
   const jwtAuthService = new JwtAuthService();
-  // Create a new user
+  console.log("Email does not exist now creating a new user");
   try {
     const newUser = new User({
       fullName,
       email,
       password: hashedPassword,
     });
+    console.log("newUser created");
     // generate token
     const token = jwtAuthService.createToken({
       id: newUser._id,
@@ -48,12 +54,15 @@ export async function registerUserService(userInput: UserInput) {
     });
     newUser.accessToken = token;
     await newUser.save();
-    return NextResponse.json({
-      title: "Registration successfull",
-      text: "Sign In",
-      user: newUser,
-      token,
-    });
+    return NextResponse.json(
+      {
+        title: "Registration successfull",
+        text: "Sign In",
+        user: newUser,
+        token,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     const e = error as Error;
     if ((e as any).code === 11000) {

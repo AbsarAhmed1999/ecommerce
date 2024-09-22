@@ -33,6 +33,12 @@ export default function Layout() {
   const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+
+  // Function to toggle the hamburger menu
+  const toggleHamburgerMenu = () => {
+    setIsHamburgerOpen((prevState) => !prevState);
+  };
   useEffect(() => {
     const result = data.filter((item) =>
       item.name.toLowerCase().includes(query.toLowerCase())
@@ -85,28 +91,56 @@ export default function Layout() {
 
   return (
     authenticated && (
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 via-gray-200 to-gray-300">
-        {/* Top Navigation Bar */}
-        <div className="flex justify-between items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg">
-          <div className="flex items-center space-x-4 w-full max-w-xl">
+      <div>
+        {/* Navigation Section */}
+        <div className="flex justify-between items-center px-8 py-4 bg-slate-900 shadow-lg">
+          {/* Hamburger menu for mobile */}
+          <div className="block lg:hidden">
+            <button
+              className="text-white focus:outline-none"
+              onClick={toggleHamburgerMenu}
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Search Bar */}
+          <div className="flex-grow max-w-md mx-auto">
             <SearchBar setQuery={setQuery} />
           </div>
-          <div className="flex space-x-20 relative" ref={dropdownRef}>
-            {/* Cart Icon with Badge */}
-            <div className="relative">
-              <Link href={"/cart"}>
+
+          {/* Cart and Avatar (Visible only on larger screens) */}
+          <div
+            className="hidden lg:flex space-x-10 items-center"
+            ref={dropdownRef}
+          >
+            <Link href={"/cart"}>
+              <div className="relative">
                 <img
                   src="/trolley.png"
-                  className="w-10 object-contain"
+                  className="w-12 object-contain"
                   alt="Cart Icon"
                 />
-              </Link>
-              {cartItemCount > 0 && (
-                <span className="absolute top-0 right-0 inline-flex items-center justify-center w-6 h-6 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
-                  {cartItemCount}
-                </span>
-              )}
-            </div>
+                {cartItemCount > 0 && (
+                  <span className="absolute top-0 right-0 inline-flex items-center justify-center w-6 h-6 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                    {cartItemCount}
+                  </span>
+                )}
+              </div>
+            </Link>
 
             <Avatar
               profileImage={user?.profileImage || "/default-avatar.png"}
@@ -114,24 +148,22 @@ export default function Layout() {
             />
 
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-10">
+              <div className="absolute  top-16 right-5 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-10">
                 {/* Profile Link */}
                 <Link href="/profile" legacyBehavior>
                   <a className="group relative flex items-center px-4 py-2 text-gray-800 hover:bg-green-400 transition-all">
-                    <FiUser className="mr-2 " /> {/* Profile icon */}
-                    <span className="flex-grow  font-semibold">Profile</span>
-                    <span className="absolute right-0 top-0 bottom-0 w-1 bg-transparent group-hover:bg-green-500 transition-all"></span>
+                    <FiUser className="mr-2 " />
+                    <span className="flex-grow font-semibold">Profile</span>
                   </a>
                 </Link>
 
                 {/* Cart Link */}
                 <Link href="/cart" legacyBehavior>
                   <a className="group relative flex items-center px-4 py-2 text-gray-800 hover:bg-yellow-400 transition-all">
-                    <FiShoppingCart className="mr-2 " /> {/* Cart icon */}
+                    <FiShoppingCart className="mr-2 " />
                     <span className="flex-grow font-semibold">
                       Cart ({cartItemCount})
                     </span>
-                    <span className="absolute right-0 top-0 bottom-0 w-1 bg-transparent group-hover:bg-yellow-500 transition-all"></span>
                   </a>
                 </Link>
 
@@ -141,18 +173,52 @@ export default function Layout() {
                     onClick={handleLogout}
                     className="group relative flex items-center px-4 py-2 text-gray-800 hover:bg-red-400 transition-all"
                   >
-                    <FiLogOut className="mr-2 " /> {/* Logout icon */}
-                    <span className="flex-grow  font-semibold">Logout</span>
-                    <span className="absolute right-0 top-0 bottom-0 w-1 bg-transparent group-hover:bg-red-500 transition-all"></span>
+                    <FiLogOut className="mr-2 " />
+                    <span className="flex-grow font-semibold">Logout</span>
                   </a>
                 </Link>
               </div>
             )}
           </div>
+
+          {/* Hamburger dropdown (Visible only when toggled on mobile) */}
+          {isHamburgerOpen && (
+            <div className="lg:hidden absolute top-16 left-0 w-full bg-white shadow-lg z-20 py-4">
+              <div className="px-4">
+                <Link href="/profile" legacyBehavior>
+                  <a className="group relative flex items-center px-4 py-2 text-gray-800 hover:bg-green-400 transition-all">
+                    <FiUser className="mr-2 " />
+                    <span className="flex-grow font-semibold">Profile</span>
+                  </a>
+                </Link>
+
+                {/* Cart Link */}
+                <Link href="/cart" legacyBehavior>
+                  <a className="group relative flex items-center px-4 py-2 text-gray-800 hover:bg-yellow-400 transition-all">
+                    <FiShoppingCart className="mr-2 " />
+                    <span className="flex-grow font-semibold">
+                      Cart ({cartItemCount})
+                    </span>
+                  </a>
+                </Link>
+
+                {/* Logout Link */}
+                <Link href={""} legacyBehavior>
+                  <a
+                    onClick={handleLogout}
+                    className="group relative flex items-center px-4 py-2 text-gray-800 hover:bg-red-400 transition-all"
+                  >
+                    <FiLogOut className="mr-2 " />
+                    <span className="flex-grow font-semibold">Logout</span>
+                  </a>
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Main Dashboard Content */}
-        <div className="flex-grow p-8 mt-8 w-full max-w-5xl mx-auto bg-gradient-to-r from-gray-800 via-gray-900 to-black shadow-2xl rounded-lg">
+        <div className="p-8 mt-8 w-full mx-auto bg-gradient-to-r from-gray-800 via-gray-900 to-black shadow-2xl rounded-lg">
           <Dashboard filteredData={filteredData} />
         </div>
       </div>

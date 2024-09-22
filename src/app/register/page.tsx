@@ -83,8 +83,6 @@ const RegistrationForm = () => {
       }
     } catch (error) {
       console.error("An error occurred during registration", error);
-    } finally {
-      setSubmitting(false);
     }
   };
 
