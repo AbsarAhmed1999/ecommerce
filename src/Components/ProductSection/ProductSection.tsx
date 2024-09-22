@@ -6,7 +6,7 @@ import "./ProductSection.css";
 // Product Card Component with Hover Effect
 const ProductCard = ({ image, title }: any) => (
   <motion.div
-    className="bg-white p-2 sm:p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+    className="bg-white sm:p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
     whileHover={{ scale: 1.1 }} // Slightly reduced hover scale for smaller products
     transition={{ duration: 0.3 }}
   >
@@ -14,7 +14,7 @@ const ProductCard = ({ image, title }: any) => (
       src={image}
       alt={title}
       loading="lazy"
-      className="w-full h-32 sm:h-40 object-cover rounded-lg mb-4"
+      className="w-full h-32 sm:h-40 object-cover rounded-lg mb-2"
     />
     <h3 className="text-sm sm:text-lg font-semibold text-center">{title}</h3>
   </motion.div>
@@ -22,7 +22,8 @@ const ProductCard = ({ image, title }: any) => (
 
 export default function ProductSection() {
   const gradientStyle = {
-    background: "linear-gradient(to right, #000000, #00aaff)",
+    // background: "linear-gradient(to right, #000000, #003366)", // Darker blue shade
+    background: "linear-gradient(to right, #000000, #005577)", // Slightly brighter dark blue
   };
 
   const variants = {
@@ -64,12 +65,14 @@ export default function ProductSection() {
 
       {/* Products Grid Section */}
       <div className="w-full px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="pb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Example product cards */}
           <ProductCard image="./product1.jpg" title="Product 1" />
           <ProductCard image="./product2.jpg" title="Product 2" />
           <ProductCard image="./product3.jpg" title="Product 3" />
           <ProductCard image="./product4.jpg" title="Product 4" />
+          <ProductCard image="./product5.jpg" title="Product 5" />
+          <ProductCard image="./product6.jpg" title="Product 6" />
           {/* Add more ProductCard components as needed */}
         </div>
       </div>

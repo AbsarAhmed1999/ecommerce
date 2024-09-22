@@ -42,6 +42,7 @@ const RegistrationForm = () => {
     values: Values,
     { setSubmitting }: FormikHelpers<Values>
   ) => {
+    setSubmitting(false);
     try {
       console.log("Form values:", values);
       const result = await fetch("/api/users/register", {
@@ -73,8 +74,8 @@ const RegistrationForm = () => {
           timer: 2500,
         }).then(() => {
           setTimeout(() => {
-            router.push("/login");
             setInitialLoading(false);
+            router.push("/login");
           }, 3000);
         });
 
@@ -85,14 +86,6 @@ const RegistrationForm = () => {
       console.error("An error occurred during registration", error);
     }
   };
-
-  if (initialLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <CircularIndeterminate />
-      </div>
-    );
-  }
 
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -131,6 +124,14 @@ const RegistrationForm = () => {
     event.preventDefault(); // Prevent the default form submission behavior if needed
     handleGoogleLogin(); // Call the login function
   };
+
+  if (initialLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <CircularIndeterminate />
+      </div>
+    );
+  }
   return (
     <div className="backgroundContainer h-lvh ">
       <BackButton>Go Back</BackButton>
