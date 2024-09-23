@@ -13,7 +13,7 @@ import { useAuthCheck } from "../Auth/useAuthCheck";
 import { Button } from "@mui/material";
 import BackButton from "@/Components/BackButton/BackButton";
 import { useRouter } from "next/navigation";
-
+import "./cart.css";
 const CartPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -50,7 +50,7 @@ const CartPage = () => {
   return (
     authenticated && (
       <div className="min-h-screen flex flex-col items-center bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 p-6">
-        <BackButton>Go Back</BackButton>
+        <BackButton></BackButton>
         <h1 className="text-4xl font-extrabold text-white mb-8">Your Cart</h1>
         {cartItems.length === 0 ? (
           <div className="text-center">
@@ -65,8 +65,8 @@ const CartPage = () => {
             </button>
           </div>
         ) : (
-          <div className="w-full max-w-4xl bg-white shadow-2xl rounded-lg p-6">
-            <ul>
+          <div className="itemsContainer w-full max-w-4xl bg-white shadow-2xl rounded-lg p-6">
+            <ul className="itemsList">
               {cartItems.map((item) => (
                 <li
                   key={item.id}
@@ -105,12 +105,12 @@ const CartPage = () => {
                 </span>
               </p>
             </div>
-            <div className="flex justify-between mt-6">
+            <div className="buttonContainer flex justify-between mt-6">
               <Button
                 onClick={clearAllItems}
                 variant="contained"
                 size="medium"
-                className="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
+                className="clearAllItems bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
               >
                 Clear All Items
               </Button>
@@ -118,7 +118,7 @@ const CartPage = () => {
                 onClick={handleCheckout}
                 variant="contained"
                 size="medium"
-                className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
+                className="proceedToCheckOut bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow-md transition duration-200"
               >
                 Proceed to Checkout
               </Button>

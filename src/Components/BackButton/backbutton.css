@@ -1,21 +1,8 @@
-/* BackButton.module.css */
-.back-button {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #000000; /* Black color */
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.back-button:hover {
-  background-color: #333333; /* Darker gray for hover effect */
-}
-
-.back-button svg {
-  margin-right: 8px;
+@media (max-width: 535px) {
+  .backButton {
+    width: 100px;
+    height: 40px;
+    top: 10px;
+    left: 10px;
+  }
 }

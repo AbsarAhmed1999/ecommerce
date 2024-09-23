@@ -12,7 +12,7 @@ const BackButton = ({ children = "Back" }) => {
   return (
     <button
       onClick={handleClick}
-      className={`flex absolute top-10 left-10 items-center px-5 py-2.5 text-black rounded-lg shadow-md hover:opacity-90 transition-opacity duration-300 `}
+      className={`backButton flex absolute top-10 left-10 items-center px-5 py-2.5 text-black rounded-lg shadow-md hover:opacity-90 transition-opacity duration-300 `}
       aria-label="Go back"
       style={{
         backgroundColor: "rgba(255, 221, 51, 1)",
