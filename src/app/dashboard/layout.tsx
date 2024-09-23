@@ -13,6 +13,7 @@ import Avatar from "@/Components/Avatar";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { FiUser, FiLogOut, FiShoppingCart } from "react-icons/fi"; // Importing the icons
+import "./dashboard.css";
 interface filteredData {
   name: string;
   price: number;
@@ -118,7 +119,7 @@ export default function Layout() {
           </div>
 
           {/* Search Bar */}
-          <div className="flex-grow max-w-md mx-auto">
+          <div className="searchBar flex-grow max-w-md mx-auto">
             <SearchBar setQuery={setQuery} />
           </div>
 

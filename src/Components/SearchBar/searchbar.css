@@ -2,4 +2,7 @@
   .searchBar {
     margin-right: 10px;
   }
+  .search {
+    width: 300px;
+  }
 }
