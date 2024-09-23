@@ -51,6 +51,10 @@
   outline: none; /* Remove default browser outline */
 }
 
+.form-input {
+  color: white;
+}
+
 .link {
   color: #007bff; /* Link color */
   text-decoration: none; /* Remove underline */
